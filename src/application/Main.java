@@ -10,7 +10,9 @@ import javafx.scene.shape.Line;
 
 
 public class Main extends Application {
-	Button button;
+    //To make window dimensions more accessible for future use
+	public int win_width = 1200;
+	public int win_height = 600;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -18,13 +20,15 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage)throws Exception{
 		primaryStage.setTitle("Tournament");
-		button = new Button();
+		
+		//Creating submit button
+		Button button = new Button();
 		button.setText("Submit");
 		
 		BorderPane bracket_layout = new BorderPane();
 		bracket_layout.getChildren().add(button);
 		
-		Scene scene = new Scene(bracket_layout,1200,700);
+		Scene scene = new Scene(bracket_layout, win_width, win_height);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
