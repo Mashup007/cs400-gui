@@ -35,6 +35,10 @@ public class Main extends Application {
 		Scene scene = new Scene(bracket_layout, win_width, win_height);
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		
+		
+		
+		//Creating bracket
 	}
 	
 	/**
