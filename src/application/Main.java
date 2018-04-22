@@ -74,23 +74,39 @@ public class Main extends Application {
 		bracket.getElements().add(move);
 		bracket.getElements().add(hline);
 		
-		bracket_layout.getChildren().add(bracket);
-
+		move.setY(475);
+		vline.setY(325);
+		
+		bracket.getElements().add(move);
+		bracket.getElements().add(vline);
+		
+		move.setY(275);
+		vline.setY(125);
+		
+		bracket.getElements().add(move);
+        bracket.getElements().add(vline);
+        
+        hline.setX(850);
+        
+        bracket.getElements().add(hline);
+        
+        move.setY(275);
+        
+        bracket.getElements().add(move);
+        bracket.getElements().add(hline);
+        
+        move.setY(325);
+        
+        bracket.getElements().add(move);
+        bracket.getElements().add(hline);
+        
+        move.setY(475);
+        
+        bracket.getElements().add(move);
+        bracket.getElements().add(hline);
+        
+		
 	}
 	
-	/**
-     * Simplifies creating lines
-     * @param line
-     * @param x0- starting x
-     * @param y0- starting y
-     * @param x1- ending x
-     * @param y1- ending y
-     */
-    public static void initLine(Line line, Float x0, Float y0, Float x1, Float y1)
-    {
-        line.setStartX(x0);
-        line.setStartY(y0);
-        line.setEndX(x1);
-        line.setEndY(y1);
-    }
+	
 }
