@@ -16,7 +16,7 @@ public class Main extends Application {
 	}
 	@Override
 	public void start(Stage primaryStage)throws Exception{
-		primaryStage.setTitle("Tornament");
+		primaryStage.setTitle("Tournament");
 		button = new Button();
 		button.setText("Submit");
 		
