@@ -26,13 +26,14 @@ public class Main extends Application {
 		button.setText("Submit");
 		
 		//Creating the general layout
-		BorderPane bracket_layout = new BorderPane();
+		BorderPane bracket_border = new BorderPane();
+		bracket_border.setBottom(button);
 		
 		//Add the button to the pane
-		bracket_layout.getChildren().add(button);
+		bracket_border.getChildren().add(button);
 		
 		//Set up the scene
-		Scene scene = new Scene(bracket_layout, win_width, win_height);
+		Scene scene = new Scene(bracket_border, win_width, win_height);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
