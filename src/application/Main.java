@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Line;
 
 
 public class Main extends Application {
@@ -43,4 +44,5 @@ public class Main extends Application {
         line.setStartY(y0);
         line.setEndX(x1);
         line.setEndY(y1);
+    }
 }
