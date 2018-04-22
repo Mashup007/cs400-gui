@@ -21,13 +21,12 @@ public class Main extends Application {
 		button = new Button();
 		button.setText("Submit");
 		
-		StackPane bracket_layout = new StackPane();
+		BorderPane bracket_layout = new BorderPane();
 		bracket_layout.getChildren().add(button);
 		
 		Scene scene = new Scene(bracket_layout,1200,700);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
 	}
 	
 	/**
