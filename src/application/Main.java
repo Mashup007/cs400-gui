@@ -56,10 +56,10 @@ public class Main extends Application {
 		//Creating semifinals
 		MoveTo move = new MoveTo();
 		move.setX(1050);
-		move.setY(350);
+		move.setY(400);
 		
 		VLineTo vline = new VLineTo();
-		vline.setY(250);
+		vline.setY(200);
 		
 		bracket.getElements().add(move);
 		bracket.getElements().add(vline);
