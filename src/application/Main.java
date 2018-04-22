@@ -12,7 +12,7 @@ import javafx.scene.shape.Line;
 public class Main extends Application {
     //To make window dimensions more accessible for future use
 	public int win_width = 1200;
-	public int win_height = 700;
+	public int win_height = 600;
 	
 	public static void main(String[] args) {
 		launch(args);
