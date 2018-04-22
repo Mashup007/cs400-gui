@@ -37,9 +37,6 @@ public class Main extends Application {
 		//Set up the scene(framework)
 		Scene scene = new Scene(bracket_border, win_width, win_height);
 		primaryStage.setScene(scene);
-<<<<<<< HEAD
-		primaryStage.show();	
-=======
 		primaryStage.show();
 		
 		
@@ -78,8 +75,7 @@ public class Main extends Application {
 		bracket.getElements().add(hline);
 		
 		bracket_layout.getChildren().add(bracket);
-		
->>>>>>> 7c783ee7661c6ca470bfcd1105efc42718a91208
+
 	}
 	
 	/**
