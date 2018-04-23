@@ -36,7 +36,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class Main extends Application {
+public class Test extends Application {
 	//To make window dimensions more accessible for future use
 	public int win_width = 1200;
 	public int win_height = 600;
@@ -63,7 +63,7 @@ public class Main extends Application {
 		
 		//Creating submit button
 		Button button = new Button();
-		button.setText("Submit");
+		button.setText("Submit Score");
 
 		//Set up the submit botton
 		HBox hbox_bottom = new HBox();
@@ -73,10 +73,10 @@ public class Main extends Application {
 		bracket_layout.setBottom(hbox_bottom);
 
 		//////////////Set up the challengers/////////////////
-		VBox r1Left = new VBox(100);
-		VBox r2Left = new VBox(220);
-		VBox r1Right = new VBox(100);
-		VBox r2Right= new VBox(220);
+		VBox r1Left = new VBox(120);
+		VBox r2Left = new VBox(270);
+		VBox r1Right = new VBox(120);
+		VBox r2Right= new VBox(270);
 		VBox r3final = new VBox(50);
 
 		HBox hbox1 = new HBox(10);
@@ -277,13 +277,15 @@ public class Main extends Application {
 		
 		/////vobox for round2_right
 		r2Right.getChildren().addAll(hbox11,hbox12);
+		r2Right.setPadding(new Insets(-20,0,0,0));
 		
 		////////vbox for round2_left
 		r2Left.getChildren().addAll(hbox9,hbox10);
+		r2Left.setPadding(new Insets(-20,0,0,0));
 		
 		////////vbox for final round
 		r3final.getChildren().addAll(hbox13,hbox14);
-		r3final.setPadding(new Insets(100,100,0,100));
+		r3final.setPadding(new Insets(win_height/5.5,100,0,100));
 		
 		HBox hboxcenter = new HBox();
 		hboxcenter.getChildren().addAll(r2Left,r3final,r2Right);
