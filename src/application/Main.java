@@ -39,6 +39,8 @@ public class Main extends Application {
     //To make window dimensions more accessible for future use
 	public int win_width = 1200;
 	public int win_height = 600;
+	private int numTeams = 8;
+	public static int curLine = 0;
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -69,74 +71,55 @@ public class Main extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
+		//Holds all the lines needed to create bracket
+		Line[] lines = new Line[getNumLines(numTeams)];
+		int rounds = 3;
+		int line_height = 200;
+		int line_width = 500/rounds-50;
+		//Center line
+		lines[0] = new Line(550, 300, 650, 300); 
+		curLine++;
+		lines = addBrack(lines, 650, 300, line_height, line_width, rounds);
 		
 		
-//		//Creating bracket
-//		Path bracket = new Path();
-//		
-//		//Setting starting point of path
-//		MoveTo start = new MoveTo();
-//		start.setX(1050);
-//		start.setY(300);
-//		
-//		//Creating winner line
-//		HLineTo winner = new HLineTo();
-//		winner.setX(1150);
-//		
-//		bracket.getElements().add(start);
-//        bracket.getElements().add(winner);
-//        
-//		//Creating semifinals
-//		MoveTo move = new MoveTo();
-//		move.setX(1050);
-//		move.setY(400);
-//		
-//		VLineTo vline = new VLineTo();
-//		vline.setY(200);
-//		
-//		bracket.getElements().add(move);
-//		bracket.getElements().add(vline);
-//		
-//		HLineTo hline = new HLineTo();
-//		hline.setX(950);
-//		
-//		bracket.getElements().add(hline);
-//		bracket.getElements().add(move);
-//		bracket.getElements().add(hline);
-//		
-//		move.setY(475);
-//		vline.setY(325);
-//		
-//		bracket.getElements().add(move);
-//		bracket.getElements().add(vline);
-//		
-//		move.setY(275);
-//		vline.setY(125);
-//		
-//		bracket.getElements().add(move);
-//        bracket.getElements().add(vline);
-//        
-//        hline.setX(850);
-//        
-//        bracket.getElements().add(hline);
-//        
-//        move.setY(275);
-//        
-//        bracket.getElements().add(move);
-//        bracket.getElements().add(hline);
-//        
-//        move.setY(325);
-//        
-//        bracket.getElements().add(move);
-//        bracket.getElements().add(hline);
-//        
-//        move.setY(475);
-//        
-//        bracket.getElements().add(move);
-//        bracket.getElements().add(hline);
-//        
-//		
+		for(Line line: lines) {
+		    if(line == null)
+		    {
+		        break;
+		    }
+		    bracket_border.getChildren().add(line);
+		}
+		
 	}
-	
+	private static Line[] addBrack(Line[] lines, int x, int y, int line_height, int line_width, int rounds) {
+	    int bot = y+line_height/2;
+	    int top = y-line_height/2;
+	    int h_end = x+line_width;
+	    //vert
+	    lines[curLine] = new Line(x, top, x, bot);
+	    lines[curLine+1] = new Line(x, top, h_end, top);
+	    lines[curLine+2] = new Line(x, bot, h_end, bot);
+	    curLine += 3;
+	    if(rounds != 0) {
+//	        lines = addBrack(lines, h_end, bot, line_height/2, line_width, rounds-1);
+	        return addBrack(lines, h_end, top, line_height/2, line_width, rounds-1);
+	    }
+	    else {
+	        return lines;
+	    }
+	}
+    private static int getNumLines(int numTeams)
+    {
+        int result;
+        if(numTeams == 2)
+        {
+            return 1;
+        }
+        else
+        {
+            return 3*(numTeams/2)+getNumLines(numTeams/2);
+        }
+    }
+    
 	
 }
