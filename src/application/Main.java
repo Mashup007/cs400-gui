@@ -180,7 +180,7 @@ public class Main extends Application {
 
 		bracket_layout.setRight(r1Right);
 		r1Right.setAlignment(Pos.CENTER);
-		r1Right.setPadding(new Insets(0,100,0,10));
+		r1Right.setPadding(new Insets(0,100,0,0));
 
 		////////////setting up for round 2/////////////////
 		///////left side////////////
@@ -288,7 +288,7 @@ public class Main extends Application {
 		HBox hboxcenter = new HBox();
 		hboxcenter.getChildren().addAll(r2Left,r3final,r2Right);
 		bracket_layout.setCenter(hboxcenter);
-		hboxcenter.setPadding(new Insets(130,0,0,100));
+		hboxcenter.setPadding(new Insets(110,0,0,100));
 
 		//////vbox for round1_left
 		r1Left.getChildren().addAll(hbox1,hbox2,hbox3,hbox4);
