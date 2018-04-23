@@ -2,6 +2,7 @@ package application;
 
 public class Games {
 	public Games () {
+		
 	}
 	public String compareScore(String team1,String team2) {
 		Challenger challenger1 = new Challenger(team1,1); ///change the second param to teamrank

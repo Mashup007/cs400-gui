@@ -36,7 +36,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class Test extends Application {
+public class Main extends Application {
 	//To make window dimensions more accessible for future use
 	public int win_width = 1200;
 	public int win_height = 600;
