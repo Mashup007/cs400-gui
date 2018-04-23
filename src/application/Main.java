@@ -311,10 +311,10 @@ public class Main extends Application {
 		int line_height = (800)/rounds;
 		int line_width = ((700)/rounds);
 		//Center line
-		lines[0] = new Line(550, 300, 650, 300); 
+		lines[0] = new Line(500, 300, 700, 300); 
 		curLine++;
-		lines = addBrack(lines, 650, 300, line_height, line_width, rounds-1);
-		lines = addBrack(lines, 550, 300, line_height, -line_width, rounds-1);
+		lines = addBrack(lines, 700, 300, line_height, line_width, rounds-1);
+		lines = addBrack(lines, 500, 300, line_height, -line_width, rounds-1);
 		
 		for(Line line: lines) {
 		    if(line == null)
