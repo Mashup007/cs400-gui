@@ -65,8 +65,8 @@ public class Main extends Application {
 		bracket_layout.setBottom(hbox_bottom);
 		
 		//////////////Set up the challengers/////////////////
-
 		VBox r1Left = new VBox(100);
+		VBox r2Left = new VBox(220);
 		
 		HBox hbox1 = new HBox();
         Label label1 = new Label();
@@ -115,14 +115,48 @@ public class Main extends Application {
 		score4.setPromptText("Score");
 		score4.setFocusTraversable(false);
 		hbox4.getChildren().addAll(label4, score4);
+		////////////setting up for round 2/////////////////
+		HBox hbox1_r2 = new HBox();
+        Label label1_r2 = new Label();
+        label1_r2.setAlignment(Pos.CENTER);
+        label1_r2.setMinHeight(25);
+        label1_r2.setText("Team1");
+
+        TextField score1_r2 = new TextField();
+        score1_r2.setMaxHeight(20); score1_r2.setPrefWidth(60);
+        score1_r2.setPromptText("Score");
+        score1_r2.setFocusTraversable(false);
+        hbox1_r2.getChildren().addAll(label1_r2, score1_r2);
+		
+        HBox hbox3_r2 = new HBox();
+		Label label3_r2 = new Label();
+		label3_r2.setAlignment(Pos.CENTER);
+		label3_r2.setMinHeight(25);
+		label3_r2.setText("Team3");
+		
+		TextField score3_r2 = new TextField();
+		score3_r2.setMaxHeight(20); score3_r2.setMaxWidth(60);
+		score3_r2.setPromptText("Score");
+		score3_r2.setFocusTraversable(false);
+		hbox3_r2.getChildren().addAll(label3_r2, score3_r2);
+		////////////setting up for round 2 done/////////////
+		
+		HBox hbox9 = new HBox();
+		hbox9.getChildren().addAll(label1_r2,score1_r2);
+		
+		HBox hbox10 = new HBox();
+		hbox10.getChildren().addAll(label3_r2,score3_r2);
+		
+		r2Left.getChildren().addAll(hbox9,hbox10);
+		bracket_layout.setCenter(r2Left);
+		r2Left.setAlignment(Pos.CENTER);
+		r2Left.setPadding(new Insets(0,0,0,90));
         
-		r1Left.getChildren().addAll(hbox1,hbox2,hbox3,hbox4);
         //add evertying into the current vbox
-        
-		//Add the button to the pane
+		r1Left.getChildren().addAll(hbox1,hbox2,hbox3,hbox4);
 		bracket_layout.setLeft(r1Left);
 		r1Left.setAlignment(Pos.CENTER);
-		r1Left.setPadding(new Insets(0,0,0,10));
+		r1Left.setPadding(new Insets(0,0,0,100));
 ////////////////Set Challengers Done/////////////////////////
 		
 		//Set up the scene(framework)
