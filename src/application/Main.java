@@ -120,12 +120,11 @@ public class Main extends Application {
         //add evertying into the current vbox
         
 		//Add the button to the pane
-		//bracket_layout.getChildren().add(vbox);
 		bracket_layout.setLeft(r1Left);
 		r1Left.setAlignment(Pos.CENTER);
 		r1Left.setPadding(new Insets(0,0,0,10));
-       // BorderPane.setAlignment(vbox, Pos.BOTTOM_CENTER);
-
+////////////////Set Challengers Done/////////////////////////
+		
 		//Set up the scene(framework)
 		Scene scene = new Scene(bracket_layout, win_width, win_height);
 		primaryStage.setScene(scene);
