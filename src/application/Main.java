@@ -103,7 +103,7 @@ public class Main extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
-<<<<<<< HEAD
+
 //		//Creating bracket
 //		Path bracket = new Path();
 //		
@@ -169,7 +169,7 @@ public class Main extends Application {
 //        bracket.getElements().add(hline);
 //        
 //		
-=======
+
 		//Holds all the lines needed to create bracket
 		Line[] lines = new Line[getNumLines(numTeams)];
 		int rounds = 3;
@@ -186,10 +186,9 @@ public class Main extends Application {
 		    {
 		        break;
 		    }
-		    bracket_border.getChildren().add(line);
+		    bracket_layout.getChildren().add(line);
 		}
 		
->>>>>>> dd355392bac530d45e6447c119942285f4b66970
 	}
 	private static Line[] addBrack(Line[] lines, int x, int y, int line_height, int line_width, int rounds) {
 	    int bot = y+line_height/2;
