@@ -2,8 +2,8 @@ package application;
 
 public class Challenger {
     private String teamName;
-    private int teamRank;
-    private int teamScore;
+    private Integer teamRank;
+    private Integer teamScore;
     private boolean teamInGame = true;
     
     /**
@@ -11,7 +11,7 @@ public class Challenger {
      * @param name: team name (decided by name in file)
      * @param rank: team rank (decided by position of team name in file)
      */
-    public Challenger(String name, int rank)
+    public Challenger(String name, Integer rank)
     {
         this.teamName = name;
         this.teamRank = rank;
@@ -27,7 +27,7 @@ public class Challenger {
     /**
      * @return teamRank
      */
-    public int getTeamRank() {
+    public Integer getTeamRank() {
         return teamRank;
     }
 
@@ -35,14 +35,14 @@ public class Challenger {
      * Change team rank as tournament proceeds
      * @param teamRank: new team ranking
      */
-    public void setTeamRank(int teamRank) {
+    public void setTeamRank(Integer teamRank) {
         this.teamRank = teamRank;
     }
 
     /**
      * @return teamScore
      */
-    public int getTeamScore() {
+    public Integer getTeamScore() {
         return teamScore;
     }
 
@@ -50,7 +50,7 @@ public class Challenger {
      * Change team score when user submits new team scores
      * @param teamScore: new team score
      */
-    public void setTeamScore(int teamScore) {
+    public void setTeamScore(Integer teamScore) {
         this.teamScore = teamScore;
     }
 
