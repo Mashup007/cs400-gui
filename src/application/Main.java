@@ -66,36 +66,66 @@ public class Main extends Application {
 		
 		//////////////Set up the challengers/////////////////
 
-        Label label = new Label();
-        label.setAlignment(Pos.CENTER);
-        label.setMinHeight(25);
-        label.setText("Team1");
+		VBox r1Left = new VBox(100);
+		
+		HBox hbox1 = new HBox();
+        Label label1 = new Label();
+        label1.setAlignment(Pos.CENTER);
+        label1.setMinHeight(25);
+        label1.setText("Team1");
 
-        TextField team = new TextField();
-        team.setMaxHeight(20); team.setMaxWidth(100);
-        team.setPromptText("Input score");
-        team.setFocusTraversable(false);
+        TextField score1 = new TextField();
+        score1.setMaxHeight(20); score1.setMaxWidth(60);
+        score1.setPromptText("Score");
+        score1.setFocusTraversable(false);
+        hbox1.getChildren().addAll(label1, score1);
         
+        HBox hbox2 = new HBox();
         Label label2 = new Label();
         label2.setAlignment(Pos.CENTER);
         label2.setMinHeight(25);
         label2.setText("Team2");
 
-        TextField team2 = new TextField();
-        team2.setMaxHeight(20); team2.setMaxWidth(100);
-        team2.setPromptText("Input score");
-        team2.setFocusTraversable(false);
+        TextField score2 = new TextField();
+        score2.setMaxHeight(20); score2.setMaxWidth(60);
+        score2.setPromptText("Score");
+        score2.setFocusTraversable(false);
+        hbox2.getChildren().addAll(label2, score2);
         
-        VBox vbox1 = new VBox(label, team);  //vbox for team1       
-        vbox1.setPadding(new Insets(20));
+        HBox hbox3 = new HBox();
+		Label label3 = new Label();
+		label3.setAlignment(Pos.CENTER);
+		label3.setMinHeight(25);
+		label3.setText("Team3");
+
+		TextField score3 = new TextField();
+		score3.setMaxHeight(20); score3.setMaxWidth(60);
+		score3.setPromptText("Score");
+		score3.setFocusTraversable(false);
+		hbox3.getChildren().addAll(label3, score3);
+		
+		HBox hbox4 = new HBox();
+		Label label4 = new Label();
+		label4.setAlignment(Pos.CENTER);
+		label4.setMinHeight(25);
+		label4.setText("Team4");
+
+		TextField score4 = new TextField();
+		score4.setMaxHeight(20); score4.setMaxWidth(60);
+		score4.setPromptText("Score");
+		score4.setFocusTraversable(false);
+		hbox4.getChildren().addAll(label4, score4);
         
-        VBox vbox2 = new VBox(label2, team2);  //vbox for team2 
-        vbox2.setPadding(new Insets(20));
+		r1Left.getChildren().addAll(hbox1,hbox2,hbox3,hbox4);
         //add evertying into the current vbox
         
-        //adjust the position of the vbox
-        bracket_layout.getChildren().add(vbox1);
-        bracket_layout.getChildren().add(vbox2);
+
+		bracket_layout.setBottom(button);
+		//Add the button to the pane
+		//bracket_layout.getChildren().add(vbox);
+		bracket_layout.setLeft(r1Left);
+		r1Left.setAlignment(Pos.CENTER);
+		r1Left.setPadding(new Insets(0,0,0,10));
        // BorderPane.setAlignment(vbox, Pos.BOTTOM_CENTER);
 
 		//Set up the scene(framework)
