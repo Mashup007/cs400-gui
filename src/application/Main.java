@@ -21,6 +21,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -51,25 +52,54 @@ public class Main extends Application {
 		Button button = new Button();
 		button.setText("Submit");
 		
-		//Creating the general layout
-		BorderPane bracket_border = new BorderPane();
+		//Creating the general layout (Using BorderPane)
+		BorderPane bracket_layout = new BorderPane();
 		
 		//Set up the submit botton
 		HBox hbox_bottom = new HBox();
 		hbox_bottom.getChildren().add(button);
 		hbox_bottom.setAlignment(Pos.CENTER);
-		hbox_bottom.setPadding(new Insets(30));
-		bracket_border.setBottom(hbox_bottom);
+		hbox_bottom.setPadding(new Insets(20));
+		bracket_layout.setBottom(hbox_bottom);
 		
-		//Set up the challengers 
-		
-		
+		//////////////Set up the challengers/////////////////
+
+        Label label = new Label();
+        label.setAlignment(Pos.CENTER);
+        label.setMinHeight(25);
+        label.setText("Team1");
+
+        TextField team = new TextField();
+        team.setMaxHeight(20); team.setMaxWidth(100);
+        team.setPromptText("Input score");
+        team.setFocusTraversable(false);
+        
+        Label label2 = new Label();
+        label2.setAlignment(Pos.CENTER);
+        label2.setMinHeight(25);
+        label2.setText("Team2");
+
+        TextField team2 = new TextField();
+        team2.setMaxHeight(20); team2.setMaxWidth(100);
+        team2.setPromptText("Input score");
+        team2.setFocusTraversable(false);
+        
+        VBox vbox1 = new VBox(label, team);  //vbox for team1       
+        vbox1.setPadding(new Insets(20));
+        
+        VBox vbox2 = new VBox(label2, team2);  //vbox for team2 
+        vbox2.setPadding(new Insets(20));
+        //add evertying into the current vbox
+        
+        //adjust the position of the vbox
+        bracket_layout.getChildren().add(vbox1);
+        bracket_layout.getChildren().add(vbox2);
+       // BorderPane.setAlignment(vbox, Pos.BOTTOM_CENTER);
+
 		//Set up the scene(framework)
-		Scene scene = new Scene(bracket_border, win_width, win_height);
+		Scene scene = new Scene(bracket_layout, win_width, win_height);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
-		
 		
 //		//Creating bracket
 //		Path bracket = new Path();
