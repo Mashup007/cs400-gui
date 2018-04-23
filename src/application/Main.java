@@ -119,8 +119,6 @@ public class Main extends Application {
 		r1Left.getChildren().addAll(hbox1,hbox2,hbox3,hbox4);
         //add evertying into the current vbox
         
-
-		bracket_layout.setBottom(button);
 		//Add the button to the pane
 		//bracket_layout.getChildren().add(vbox);
 		bracket_layout.setLeft(r1Left);
@@ -201,54 +199,55 @@ public class Main extends Application {
 //		
 
 		//Holds all the lines needed to create bracket
-		Line[] lines = new Line[getNumLines(numTeams)];
-		int rounds = 3;
-		int line_height = 200;
-		int line_width = 500/rounds-50;
-		//Center line
-		lines[0] = new Line(550, 300, 650, 300); 
-		curLine++;
-		lines = addBrack(lines, 650, 300, line_height, line_width, rounds);
-		
-		
-		for(Line line: lines) {
-		    if(line == null)
-		    {
-		        break;
-		    }
-		    bracket_layout.getChildren().add(line);
-		}
-		
-	}
-	private static Line[] addBrack(Line[] lines, int x, int y, int line_height, int line_width, int rounds) {
-	    int bot = y+line_height/2;
-	    int top = y-line_height/2;
-	    int h_end = x+line_width;
-	    //vert
-	    lines[curLine] = new Line(x, top, x, bot);
-	    lines[curLine+1] = new Line(x, top, h_end, top);
-	    lines[curLine+2] = new Line(x, bot, h_end, bot);
-	    curLine += 3;
-	    if(rounds != 0) {
-//	        lines = addBrack(lines, h_end, bot, line_height/2, line_width, rounds-1);
-	        return addBrack(lines, h_end, top, line_height/2, line_width, rounds-1);
-	    }
-	    else {
-	        return lines;
-	    }
-	}
-    private static int getNumLines(int numTeams)
-    {
-        int result;
-        if(numTeams == 2)
-        {
-            return 1;
-        }
-        else
-        {
-            return 3*(numTeams/2)+getNumLines(numTeams/2);
-        }
-    }
+//		Line[] lines = new Line[getNumLines(numTeams)];
+//		int rounds = 3;
+//		int line_height = 200;
+//		int line_width = 500/rounds-50;
+//		//Center line
+//		lines[0] = new Line(550, 300, 650, 300); 
+//		curLine++;
+//		lines = addBrack(lines, 650, 300, line_height, line_width, rounds);
+//		
+//		
+//		for(Line line: lines) {
+//		    if(line == null)
+//		    {
+//		        break;
+//		    }
+//		    bracket_layout.getChildren().add(line);
+//		}
+//		
+//	}
+//	private static Line[] addBrack(Line[] lines, int x, int y, int line_height, int line_width, int rounds) {
+//	    int bot = y+line_height/2;
+//	    int top = y-line_height/2;
+//	    int h_end = x+line_width;
+//	    //vert
+//	    lines[curLine] = new Line(x, top, x, bot);
+//	    lines[curLine+1] = new Line(x, top, h_end, top);
+//	    lines[curLine+2] = new Line(x, bot, h_end, bot);
+//	    curLine += 3;
+//	    if(rounds != 0) {
+////	        lines = addBrack(lines, h_end, bot, line_height/2, line_width, rounds-1);
+//	        return addBrack(lines, h_end, top, line_height/2, line_width, rounds-1);
+//	    }
+//	    else {
+//	        return lines;
+//	    }
+//	}
+//    private static int getNumLines(int numTeams)
+//    {
+//        int result;
+//        if(numTeams == 2)
+//        {
+//            return 1;
+//        }
+//        else
+//        {
+//            return 3*(numTeams/2)+getNumLines(numTeams/2);
+//        }
+//    }
     
-	
+
+}
 }
