@@ -40,7 +40,7 @@ public class Main extends Application {
 	//To make window dimensions more accessible for future use
 	public int win_width = 1200;
 	public int win_height = 600;
-	private int numTeams = 8;
+	private int numTeams = 16;
 	public static int curLine = 0;
 
 	public static void main(String[] args) {
@@ -314,7 +314,7 @@ public class Main extends Application {
 		lines[0] = new Line(550, 300, 650, 300); 
 		curLine++;
 		lines = addBrack(lines, 650, 300, line_height, line_width, rounds-1);
-		
+		lines = addBrack(lines, 550, 300, line_height, -line_width, rounds-1);
 		
 		for(Line line: lines) {
 		    if(line == null)
@@ -335,7 +335,7 @@ public class Main extends Application {
 	    lines[curLine+2] = new Line(x, bot, h_end, bot);
 	    curLine += 3;
 	    if(rounds != 1) {
-        //lines = addBrack(lines, h_end, bot, line_height/2, line_width, rounds-1);
+	        lines = addBrack(lines, h_end, bot, line_height/2, line_width, rounds-1);
 	        return addBrack(lines, h_end, top, line_height/2, line_width, rounds-1);
 	    }
 	    else {
