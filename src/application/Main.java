@@ -308,8 +308,8 @@ public class Main extends Application {
 		//Holds all the lines needed to create bracket
 		Line[] lines = new Line[getNumLines(numTeams)];
 		int rounds = 3;
-		int line_height = (800)/rounds;
-		int line_width = ((700)/rounds);
+		int line_height = (win_height)/2;
+		int line_width = (win_width)/(rounds*2);
 		//Center line
 		lines[0] = new Line(500, 300, 700, 300); 
 		curLine++;
