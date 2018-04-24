@@ -85,6 +85,23 @@ public class Challenger {
         
     }
     
+    public HBox restictHBox(HBox hbox) {
+        hbox.getChildren().clear();
+        
+        nameLabel = new Label();
+        nameLabel.setAlignment(Pos.CENTER);
+        nameLabel.setText(teamName);
+        
+        Label s = new Label();
+        s.setText(teamScore.toString());
+        s.setMaxSize(60, 30);
+        s.setMinSize(60, 30);
+        
+        hbox.getChildren().addAll(nameLabel, s);
+        
+        return hbox;
+    }
+    
     public VBox fillVBox(VBox vbox) {
         nameLabel = new Label();
         nameLabel.setAlignment(Pos.CENTER);

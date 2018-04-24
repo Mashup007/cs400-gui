@@ -49,6 +49,7 @@ public class Main extends Application {
 	private int rounds;
 	public static int curLine = 0;
 	private ArrayList<ArrayList<Challenger>> challengers;
+	private ArrayList<ArrayList<HBox>> challengerContent;
 	private ArrayList<VBox> columns;
 
 	public static void main(String[] args) {
@@ -86,8 +87,10 @@ public class Main extends Application {
         //////////////Create Challenger Objects/////////////////
 
         challengers = new ArrayList<ArrayList<Challenger>>();
+        challengerContent = new ArrayList<ArrayList<HBox>>();
         for (int i = 0; i < rounds; i++) {
             challengers.add(new ArrayList<Challenger>());
+            challengerContent.add(new ArrayList<HBox>());
         }
         
         challengers.set(0, seed());
@@ -125,9 +128,14 @@ public class Main extends Application {
                     newHBox.setMinSize(colSpace, (double)530/numBoxes);
                     newHBox.setMaxSize(colSpace, (double)530/numBoxes);
                     if (i == 0 || i == columns.size()-1) {
-                        newHBox = challengers.get(0).get(challengerIndex).fillHBox(newHBox);
+                        challengers.get(0).get(challengerIndex).fillHBox(newHBox);
                         challengerIndex++;
-                    } 
+                    }
+                    if (i <= columns.size()/2)
+                        challengerContent.get(i).add(newHBox);
+                    else
+                        challengerContent.get(columns.size()-(i+1)).add(newHBox);
+                        
                     boxes.add(newHBox);
                 } else if (numTeams == 2) {
                     columns.set(i, challengers.get(0).get(challengerIndex).fillVBox(columns.get(i)));
@@ -138,6 +146,7 @@ public class Main extends Application {
             }
             if (boxes.size() != 0) columns.get(i).getChildren().addAll(boxes);
         }
+        
         // Add finished columns to central layout
         central.getChildren().addAll(columns);
         bracket_layout.setCenter(central);
@@ -223,8 +232,9 @@ public class Main extends Application {
 	}
 	
 	private void submitClicked() {
+	    //for (ArrayList<Challenger> a : challengers) System.out.println(a.size());
 	    int currRound = 1;
-	    for (ArrayList<Challenger> a : challengers) {   
+	    for (ArrayList<Challenger> a : challengers) {
 	        for (int i = 0; i < a.size(); i+=2) {
 	            Challenger t1 = a.get(i);
 	            Challenger t2 = a.get(i+1);
@@ -233,25 +243,49 @@ public class Main extends Application {
 	                    && t1.getTeamScore() != -1 && t2.getTeamScore() != -1
 	                    && t1.getCurrRound() == currRound && t2.getCurrRound() == currRound) {
 	                Challenger winner = t1;
-	                if (t1.getTeamScore() < t2.getTeamScore()) winner = t2;
-	                //tournamentAdvance(currRound, winner, i);
+	                Challenger loser = t2;
+	                if (t1.getTeamScore() < t2.getTeamScore()) { 
+	                    winner = t2;
+	                    loser = t1;
+	                }
+	                tournamentAdvance(currRound, winner, loser, i);
 	            }
 	        }
 	        currRound++;
 	    }
 	}
 	
-	private void tournamentAdvance(int currRound, Challenger winner, int index) {
-	    HBox modify;
-	    HBox destination;
+	private void tournamentAdvance(int currRound, Challenger winner, Challenger loser, int index) {
+	    HBox modifyWinner = null;
+	    HBox modifyLoser = null;
+	    HBox destination = null;
 	    int numTeamsinRound = numTeams/(int)Math.pow(2, currRound-1);
 	    
-	    // winner on left side of bracket
-	    if (index < numTeamsinRound/2) {
-	        for (int i = 0; i < numTeamsinRound/2;i++) {
-	            if (((Parent) columns.get(currRound-1).getChildren().get(i)))
+	    for (int i = 0; i < numTeamsinRound; i++) {
+	        if (challengers.get(currRound-1).get(i) == winner) {
+	            modifyWinner = challengerContent.get(currRound-1).get(i);
+	            destination = challengerContent.get(currRound).get(i/2);
+	            challengers.get(currRound).set(i/2, winner);
+	        } else if (challengers.get(currRound-1).get(i) == loser) {
+	            modifyLoser = challengerContent.get(currRound-1).get(i);
 	        }
 	    }
+	    if (modifyWinner == null) System.out.println("Error, winner not found");
+	    if (modifyLoser == null) System.out.println("Error, loser not found");
+	    if (destination == null) System.out.println("Error: destination not found");
+	    
+	    winner.restictHBox(modifyWinner);
+	    loser.restictHBox(modifyLoser);
+	    winner.fillHBox(destination);
+	    
+	    loser.exitTournament();
+	    winner.setTeamScore(-1);
+	    winner.setOpposition(null);
+	    winner.setCurrRound(winner.getCurrRound()+1);
+	}
+	
+	private void finalRound() {
+	    System.out.println("Should be final round");
 	}
 
 }
