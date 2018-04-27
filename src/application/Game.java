@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
 
+/**
+ * the class of game
+ *
+ */
 public class Game {
 	private ArrayList< ArrayList<Challenger> > tournament;
 	

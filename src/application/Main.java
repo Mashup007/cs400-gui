@@ -15,6 +15,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.canvas.Canvas;  
 
+/**
+ * the main class
+ *
+ */
 public class Main extends Application {
 
 	private static Game game = null;

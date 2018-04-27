@@ -2,6 +2,10 @@ package application;
 
 import javafx.scene.canvas.GraphicsContext;
 
+/**
+ * the class of challenger
+ *
+ */
 public class Challenger {
 	private String teamName;
 	private int teamScore;
