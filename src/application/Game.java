@@ -4,11 +4,6 @@ import java.util.ArrayList;
 
 import javafx.scene.canvas.GraphicsContext;
 
-/**
- * creating the schedule of the tournament
- *
- */
-
 public class Game {
 	private ArrayList< ArrayList<Challenger> > tournament;
 	
@@ -27,24 +22,42 @@ public class Game {
 	 */
 	public void draw(GraphicsContext g) {
 		g.setLineWidth(1);
+		int level = (int)(Math.log(getTeamNumber()) / Math.log(2)) * 2 - 1;
+		// draw information
 		for (int i = 0; i < tournament.size(); i++) {
 			ArrayList<Challenger> challengers = tournament.get(i);
-			int last_y = 0;
+			if (challengers.size() == 1 && i != 0)
+				break;
 			for (int j = 0; j < challengers.size(); j++) {
 				Challenger challenger = challengers.get(j);
-				int y = j * ((int)Math.pow(2, i) * 50);
+				int split = (challengers.size() / 2 == 0 ? 1 : challengers.size() / 2);
+				int y = (j % split)  * 	((int)Math.pow(2, i) * 100);
+				int x = j >= split ? (level - i) * 150 : i * 150;
 				if (i != 0)
-					y += ((int)Math.pow(2, i) * 50) / 2 - 25;
-				challenger.draw(g, i * 210,  y);
-				// draw line
-				if (j % 2 == 1 && i + 1 < tournament.size()) {
-					int target_y = (j / 2) * ((int)Math.pow(2, i + 1) * 50);
-					target_y += ((int)Math.pow(2, i  + 1) * 50) / 2 - 25;
-					drawLine(g, i * 210 + 100, y + 25, 
-							i * 210 + 100, last_y + 25, 
-							(i + 1) * 210, target_y + 25);
-				}
-				last_y = y;
+					y += ((int)Math.pow(2, i) * 100) / 2 - 50;
+				challenger.draw(g, x,  y);
+			}
+		}
+		// draw line
+		for (int i = 0; i < tournament.size(); i++) {
+			ArrayList<Challenger> challengers = tournament.get(i);
+			if (challengers.size() == 1 || i + 1 == tournament.size())
+				continue;
+			if (challengers.size() == 2) {
+				g.strokeLine(challengers.get(0).getDrawX() + 100, challengers.get(0).getDrawY() + 25,
+						challengers.get(1).getDrawX(), challengers.get(1).getDrawY() + 25);
+				continue;
+			}
+			ArrayList<Challenger> nextchallengers = tournament.get(i + 1);
+			for (int j = 0; j < challengers.size() / 2; j += 2) {
+				drawLine(g, challengers.get(j).getDrawX() + 100, challengers.get(j).getDrawY() + 25,
+						challengers.get(j + 1).getDrawX() + 100, challengers.get(j + 1).getDrawY() + 25,
+						nextchallengers.get(j / 2).getDrawX(), nextchallengers.get(j / 2).getDrawY() + 25);
+			}
+			for (int j = challengers.size() / 2; j < challengers.size(); j += 2) {
+				drawLine(g, challengers.get(j).getDrawX(), challengers.get(j).getDrawY() + 25,
+						challengers.get(j + 1).getDrawX(), challengers.get(j + 1).getDrawY() + 25,
+						nextchallengers.get(j / 2).getDrawX() + 100, nextchallengers.get(j / 2).getDrawY() + 25);
 			}
 		}
 	}
@@ -133,12 +146,15 @@ public class Game {
 		if (!current.get(0).hasScore())
 			return;
 		Challenger challenger1nd = current.get(0);
+		challenger1nd.setHonor("CHAMPION");
 		Challenger challenger2nd = null;
 		Challenger challenger3nd = null;
 		if (tournament.size() - 2 >= 0) {
 			ArrayList<Challenger> temp = tournament.get(tournament.size() - 2);
 			challenger2nd = temp.get(0).getTeamName().equals(challenger1nd.getTeamName()) ?
 					temp.get(1) : temp.get(0);
+			challenger1nd = temp.get(0).getTeamName().equals(challenger1nd.getTeamName()) ?
+							temp.get(0) : temp.get(1);
 		}
 		if (tournament.size() - 3 >= 0) {
 			ArrayList<Challenger> temp = tournament.get(tournament.size() - 3);
@@ -154,8 +170,10 @@ public class Game {
 			}
 		}
 		challenger1nd.setHonor("CHAMPION");
-		challenger2nd.setHonor("2nd Place");
-		challenger3nd.setHonor("3nd Place");
+		if (challenger2nd != null)
+			challenger2nd.setHonor("2nd Place");
+		if (challenger3nd != null)
+			challenger3nd.setHonor("3nd Place");
 	}
 	
 	/**

@@ -15,10 +15,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.canvas.Canvas;  
 
-/**
- * the main class
- *
- */
 public class Main extends Application {
 
 	private static Game game = null;
@@ -39,7 +35,7 @@ public class Main extends Application {
 		primaryStage.setTitle("Tournament Bracket");
 		// GridPane - Form
 		GridPane gPane = new GridPane();
-		Scene scene = new Scene(gPane, 900, 800, Color.DARKGRAY);
+		Scene scene = new Scene(gPane, 1400, 800, Color.DARKGRAY);
 		
 		Label nameLabel = new Label();
 		nameLabel.setAlignment(Pos.CENTER);
@@ -64,8 +60,8 @@ public class Main extends Application {
 		scoreInput.setPromptText("Input Team Score");
 		scoreInput.setFocusTraversable(false);
 
-		int width = (int)(Math.log(game.getTeamNumber()) / Math.log(2)) * 210 + 100;
-		int height = game.getTeamNumber() * 60;
+		int width = (int)(Math.log(game.getTeamNumber()) / Math.log(2)) * 2 * 150 + 100;
+		int height = game.getTeamNumber() * 50 + 100;
 		Canvas canvas = new Canvas(width , height);  
 		ScrollPane scrollPane = new ScrollPane();
 		scrollPane.setContent(canvas);

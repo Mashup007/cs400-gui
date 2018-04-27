@@ -5,16 +5,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * creating the file manager
- *
- */
 public class FileManager {
 	
-	/**
-	 *load the challenger into the arraylist
-	 */
-    public static ArrayList<Challenger> loadChallenger(String file) {
+	public static ArrayList<Challenger> loadChallenger(String file) {
 		ArrayList<Challenger> result = new ArrayList<>();
 		try {
 			Scanner sc = new Scanner(new File(file));

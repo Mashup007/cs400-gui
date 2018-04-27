@@ -2,14 +2,12 @@ package application;
 
 import javafx.scene.canvas.GraphicsContext;
 
-/**
- * the challenger class
- *
- */
 public class Challenger {
 	private String teamName;
 	private int teamScore;
 	private String honor;
+	private int drawX;
+	private int drawY;
 	
 	/**
 	 * Constructor
@@ -76,6 +74,22 @@ public class Challenger {
 	public void setHonor(String honor) {
 		this.honor = honor;
 	}
+	
+	/**
+	 * getter
+	 * @return
+	 */
+	public int getDrawX() {
+		return drawX;
+	}
+
+	/**
+	 * getter
+	 * @return
+	 */
+	public int getDrawY() {
+		return drawY;
+	}
 
 	/**
 	 * draw the team
@@ -84,12 +98,14 @@ public class Challenger {
 	 * @param y
 	 */
 	public void draw(GraphicsContext g, int x, int y) {
+		drawX = x;
+		drawY = y;
 		g.strokeRect(x, y, 100, 40);
-		g.strokeText(teamName, x + 5, y + 15);
+		g.fillText(teamName, x + 5, y + 15);
 		if (hasScore())
-			g.strokeText(teamScore + "", x + 5, y + 30);
+			g.fillText(teamScore + "", x + 5, y + 30);
 		if (honor != null)
-			g.strokeText(honor, x + 25, y + 30);
+			g.fillText(honor, x + 25, y + 30);
 	}
 	
 }
