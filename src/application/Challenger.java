@@ -1,73 +1,95 @@
 package application;
 
+import javafx.scene.canvas.GraphicsContext;
+
+/**
+ * the challenger class
+ *
+ */
 public class Challenger {
-    private String teamName;
-    private Integer teamRank;
-    private Integer teamScore;
-    private boolean teamInGame = true;
-    
-    /**
-     * Basic constructor, initializes teamName, teamRank, and teamInGame.
-     * @param name: team name (decided by name in file)
-     * @param rank: team rank (decided by position of team name in file)
-     */
-    public Challenger(String name, Integer rank)
-    {
-        this.teamName = name;
-        this.teamRank = rank;
-    }
-    
-    /**
-     * @return teamName
-     */
-    public String getTeamName() {
-        return teamName;
-    }
-    
-    /**
-     * @return teamRank
-     */
-    public Integer getTeamRank() {
-        return teamRank;
-    }
+	private String teamName;
+	private int teamScore;
+	private String honor;
+	
+	/**
+	 * Constructor
+	 * @param teamName
+	 */
+	public Challenger(String teamName) {
+		this.teamName = teamName;
+		this.teamScore = -1;
+		this.honor = null;
+	}
+	
+	/**
+	 * check if the team has score
+	 * @return
+	 */
+	public boolean hasScore() {
+		return teamScore != -1;
+	}
+	
+	/**
+	 * getter
+	 * @return
+	 */
+	public String getTeamName() {
+		return teamName;
+	}
+	
+	/**
+	 * setter
+	 * @param teamName
+	 */
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
+	}
+	
+	/**
+	 * getter
+	 * @return
+	 */
+	public int getTeamScore() {
+		return teamScore;
+	}
 
-    /**
-     * Change team rank as tournament proceeds
-     * @param teamRank: new team ranking
-     */
-    public void setTeamRank(Integer teamRank) {
-        this.teamRank = teamRank;
-    }
+	/**
+	 * setter
+	 * @param teamName
+	 */
+	public void setTeamScore(int teamScore) {
+		this.teamScore = teamScore;
+	}
 
-    /**
-     * @return teamScore
-     */
-    public Integer getTeamScore() {
-        return teamScore;
-    }
+	/**
+	 * getter
+	 * @return
+	 */
+	public String getHonor() {
+		return honor;
+	}
 
-    /**
-     * Change team score when user submits new team scores
-     * @param teamScore: new team score
-     */
-    public void setTeamScore(Integer teamScore) {
-        this.teamScore = teamScore;
-    }
+	/**
+	 * setter
+	 * @param teamName
+	 */
+	public void setHonor(String honor) {
+		this.honor = honor;
+	}
 
-    /**
-     * Return true if team hasn't lost yet, return false if the team has lost and is no longer
-     * part of the tournament
-     * @return teamInGame
-     */
-    public boolean isTeamInGame() {
-        return teamInGame;
-    }
-
-    /**
-     * Set teamInGame to false when the team has lost a game.
-     */
-    public void exitTournament() {
-        this.teamInGame = false;
-    }
-
+	/**
+	 * draw the team
+	 * @param g
+	 * @param x
+	 * @param y
+	 */
+	public void draw(GraphicsContext g, int x, int y) {
+		g.strokeRect(x, y, 100, 40);
+		g.strokeText(teamName, x + 5, y + 15);
+		if (hasScore())
+			g.strokeText(teamScore + "", x + 5, y + 30);
+		if (honor != null)
+			g.strokeText(honor, x + 25, y + 30);
+	}
+	
 }
