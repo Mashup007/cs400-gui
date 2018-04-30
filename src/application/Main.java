@@ -1,6 +1,8 @@
 package application;
 
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -51,8 +53,11 @@ public class Main extends Application {
 	private ArrayList<ArrayList<Challenger>> challengers;
 	private ArrayList<ArrayList<HBox>> challengerContent;
 	private ArrayList<VBox> columns;
-
+	public static int rank = 0;
+	public static String path;
+	
 	public static void main(String[] args) {
+		path = args[0];
 		launch(args);
 	}
 
@@ -198,11 +203,11 @@ public class Main extends Application {
         else return 3*(numTeams/2)+getNumLines(numTeams/2);
     }
 	
-	private ArrayList<Challenger> seed() {
+	private ArrayList<Challenger> seed() {	
 	    ArrayList<Challenger> tempChallengers = new ArrayList<Challenger>();
 	    ArrayList<Challenger> startingChallengers = new ArrayList<Challenger>();
 	    for (int i = 0; i < numTeams; i++) {
-	        tempChallengers.add(new Challenger(randName(), i + 1));
+	        tempChallengers.add(new Challenger(randName(i), i + 1));
 	    }
 	    // seed opposition
 	    for (int i = 0; i < numTeams/2; i++) {
@@ -215,20 +220,10 @@ public class Main extends Application {
 	    return startingChallengers;
 	}
 	
-	private String randName() {
-	    Random rand = new Random();
-	    String[] adjectives = new String[] { "Blue", "Red", "Green", "Yellow", 
-	                                        "Fighting", "Big", "Little", "Alpha", 
-	                                        "Mean", "Gruesome", "Unstoppable", 
-	                                        "Crazy", "Amazing", "Incredible",
-	                                        "Fantastic" };
-	    String[] nouns = new String[] { "Devils", "Saints", "Apples", "Machines",
-	                                    "Tigers", "Penguins", "Jets", "Patriots",
-	                                    "Darts", "Vikings", "Colts", "Panthers",
-	                                    "Eagles", "Ravens", "Hawks", "Angels",
-	                                    "Chickens", "Roosters", "Bananas", "Warriors" };
-	    
-	    return adjectives[rand.nextInt(adjectives.length)] + " " + nouns[rand.nextInt(nouns.length)];
+	private String randName(int x) {		
+		String name = new String(); 
+		name = FileManager.loadChallenger(path).get(x).toString();
+		return name ;
 	}
 	
 	private void submitClicked() {
