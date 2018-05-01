@@ -17,7 +17,7 @@ public class FileManager {
      * @param file
      * @return
      */
-
+ 
     public static ArrayList<String> loadChallenger(String file) {
 		ArrayList<String> result = new ArrayList<>();
 		try {

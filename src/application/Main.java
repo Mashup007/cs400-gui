@@ -47,7 +47,7 @@ public class Main extends Application {
 	//To make window dimensions more accessible for future use
 	public int win_width = 1200;
 	public int win_height = 600;
-	private int numTeams = 16;
+	private int numTeams = number_of_Teams();
 	private int rounds;
 	public static int curLine = 0;
 	private ArrayList<ArrayList<Challenger>> challengers;
@@ -55,6 +55,7 @@ public class Main extends Application {
 	private ArrayList<VBox> columns;
 	public static int rank = 0;
 	public static String path;
+	
 	
 	public static void main(String[] args) {
 		path = args[0];
@@ -220,6 +221,11 @@ public class Main extends Application {
 	    return startingChallengers;
 	}
 	
+	private int number_of_Teams() {
+		int numTeam = 0;
+		numTeam = FileManager.loadChallenger(path).size();
+		return numTeam;
+	}
 	private String randName(int x) {		
 		String name = new String(); 
 		name = FileManager.loadChallenger(path).get(x);
