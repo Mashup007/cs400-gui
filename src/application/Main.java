@@ -207,7 +207,7 @@ public class Main extends Application {
 	    ArrayList<Challenger> tempChallengers = new ArrayList<Challenger>();
 	    ArrayList<Challenger> startingChallengers = new ArrayList<Challenger>();
 	    for (int i = 0; i < numTeams; i++) {
-	        tempChallengers.add(new Challenger(randName(i), i + 1));
+	        tempChallengers.add(new Challenger(randName(i), i + 1 ));
 	    }
 	    // seed opposition
 	    for (int i = 0; i < numTeams/2; i++) {
@@ -223,7 +223,7 @@ public class Main extends Application {
 	private String randName(int x) {		
 		String name = new String(); 
 		name = FileManager.loadChallenger(path).get(x);
-		return name ;
+		return name;
 	}
 	
 	private void submitClicked() {
