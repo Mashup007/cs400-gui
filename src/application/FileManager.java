@@ -18,15 +18,15 @@ public class FileManager {
      * @return
      */
 
-    public static ArrayList<Challenger> loadChallenger(String file) {
-		ArrayList<Challenger> result = new ArrayList<>();
+    public static ArrayList<String> loadChallenger(String file) {
+		ArrayList<String> result = new ArrayList<>();
 		try {
 			Scanner sc = new Scanner(new File(file));
 			while (sc.hasNextLine()) {
 				String line = sc.nextLine();
 				
 				if (line.length() > 0)
-					result.add(new Challenger(line,0));
+					result.add(new String(line));
 					// set every teams' rank at 0, modify the top 3 teams later
 			}		
 			sc.close();

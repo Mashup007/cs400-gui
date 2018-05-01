@@ -222,7 +222,7 @@ public class Main extends Application {
 	
 	private String randName(int x) {		
 		String name = new String(); 
-		name = FileManager.loadChallenger(path).get(x).toString();
+		name = FileManager.loadChallenger(path).get(x);
 		return name ;
 	}
 	
