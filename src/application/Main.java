@@ -65,8 +65,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 	    primaryStage.setTitle("Tournament");
-        rounds = (int)(Math.log10(numTeams)/Math.log10(2));
-
+	    if (numTeams == 1) {rounds = 1;}
+	    else { rounds = (int)(Math.log10(numTeams)/Math.log10(2)); }
         //Creating the general layout (Using BorderPane)
         BorderPane bracket_layout = new BorderPane();
         
@@ -98,7 +98,7 @@ public class Main extends Application {
             challengers.add(new ArrayList<Challenger>());
             challengerContent.add(new ArrayList<HBox>());
         }
-        
+        if (numTeams == 1) {challengers.set(0, seed());} 
         challengers.set(0, seed());
         
         // Fill proceeding slots with nulls
@@ -128,7 +128,7 @@ public class Main extends Application {
             int numBoxes = (int)Math.pow(2,Math.abs(rounds-1-i));
             ArrayList<HBox> boxes = new ArrayList<HBox>();
             for (int j = 0; j < numBoxes; j++) {
-                if (numBoxes != 1) {
+                if (numBoxes != 1 && numBoxes != 0) {
                     HBox newHBox = new HBox(10);
                     newHBox.setAlignment(Pos.CENTER);
                     newHBox.setMinSize(colSpace, (double)530/numBoxes);
@@ -144,10 +144,25 @@ public class Main extends Application {
                         
                     boxes.add(newHBox);
                 } else if (numTeams == 2) {
+                	System.out.println("column size:"+columns.size());
+                	System.out.println("challengerindex1:"+challengerIndex);
+                	System.out.println("i:"+i);
+                	System.out.println(numBoxes);
+                	System.out.println(challengers);
+                	
                     columns.set(i, challengers.get(0).get(challengerIndex).fillVBox(columns.get(i)));
                     challengerIndex++;
                     columns.set(i, challengers.get(0).get(challengerIndex).fillVBox(columns.get(i)));
+                    System.out.println("challengerindex1:"+challengerIndex);
                     columns.get(i).setSpacing(50);
+                } else if (numTeams == 1) { // added, 5/1/2018 16:20
+                	System.out.println("column size:"+columns.size());
+                	System.out.println("challengerindex1:"+challengerIndex);
+                	System.out.println("i:"+i);
+                	System.out.println(numBoxes);
+                	System.out.println(challengers);
+                	
+                	columns.set(0, challengers.get(0).get(0).fillVBox(columns.get(0)));
                 }
             }
             if (boxes.size() != 0) columns.get(i).getChildren().addAll(boxes);
@@ -168,18 +183,20 @@ public class Main extends Application {
         double line_height = (win_height-70)/2; // Fit to center height
         double line_width = (win_width)/(rounds*2-1); // Fit to window width
         //Center line
-        lines[0] = new Line(600-line_width/2, 312, 600+line_width/2, 310); 
-        if (lines.length != 1) {
-            lines = addBrack(lines, 600+line_width/2, 312, line_height, line_width, rounds-1);
-            lines = addBrack(lines, 600-line_width/2, 312, line_height, -line_width, rounds-1);
-        }
-        
-        for(Line line: lines) {
-            if(line == null)
-            {
-                break;
-            }
-            bracket_layout.getChildren().add(line);
+        if (numTeams != 1) { //added 5/1/2018
+	        lines[0] = new Line(600-line_width/2, 312, 600+line_width/2, 310); 
+	        if (lines.length != 1) {
+	            lines = addBrack(lines, 600+line_width/2, 312, line_height, line_width, rounds-1);
+	            lines = addBrack(lines, 600-line_width/2, 312, line_height, -line_width, rounds-1);
+	        }
+	        
+	        for(Line line: lines) {
+	            if(line == null)
+	            {
+	                break;
+	            }
+	            bracket_layout.getChildren().add(line);
+	        }
         }
 	} 
 	
@@ -200,15 +217,22 @@ public class Main extends Application {
     }
    
     private static int getNumLines(int numTeams) {
-        if (numTeams == 2) return 1;
+        if (numTeams == 2 ) return 1;
+        if (numTeams == 1) return 0 ;
         else return 3*(numTeams/2)+getNumLines(numTeams/2);
     }
 	
 	private ArrayList<Challenger> seed() {	
 	    ArrayList<Challenger> tempChallengers = new ArrayList<Challenger>();
 	    ArrayList<Challenger> startingChallengers = new ArrayList<Challenger>();
+	    ArrayList<Challenger> onlyoneChallenger = new ArrayList<Challenger>();
+	    if (numTeams == 1) { 
+	    	onlyoneChallenger.add(new Challenger(randName(0), 1 ));
+	    	return onlyoneChallenger;
+	    }
 	    for (int i = 0; i < numTeams; i++) {
 	        tempChallengers.add(new Challenger(randName(i), i + 1 ));
+	       
 	    }
 	    // seed opposition
 	    for (int i = 0; i < numTeams/2; i++) {
