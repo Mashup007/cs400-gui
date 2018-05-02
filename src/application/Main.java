@@ -197,6 +197,7 @@ public class Main extends Application {
                 bracket_layout.getChildren().add(line);
             }
         }
+        else determineWinner();
     } 
     
    private static Line[] addBrack(Line[] lines, double x, double y, double line_height, double line_width, int rounds) {
@@ -228,7 +229,7 @@ public class Main extends Application {
         
         if (numTeams == 1) { 
                     onlyoneChallenger.add(new Challenger(randName(0), 1 ));
-                    onlyoneChallenger.addAll(null);
+                    onlyoneChallenger.add(null);
                     return onlyoneChallenger;
         }
         for (int i = 0; i < numTeams; i++) {
@@ -366,6 +367,10 @@ public class Main extends Application {
         
         Challenger t1 = challengers.get(challengers.size()-1).get(0);
         Challenger t2 = challengers.get(challengers.size()-1).get(1);
+        if (t2 == null) {
+            updatePlacing(t1,modifyWinner,null,null);
+            return;
+        }
         Challenger winner = t1;
         Challenger loser = t2;
         if (t1.getTeamScore() < t2.getTeamScore()) {
@@ -392,9 +397,6 @@ public class Main extends Application {
          * Clear them and use challenger data to fill them
          * 
          */
-        
-        System.out.println("First Place: " + winner.getTeamName());
-        System.out.println("Second Place: " + loser.getTeamName());
         
         updatePlacing(winner, modifyWinner, loser, modifyLoser);
     }
