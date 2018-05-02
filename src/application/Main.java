@@ -144,11 +144,11 @@ public class Main extends Application {
                         
                     boxes.add(newHBox);
                 } else if (numTeams == 2) {
-                	System.out.println("column size:"+columns.size());
-                	System.out.println("challengerindex1:"+challengerIndex);
-                	System.out.println("i:"+i);
-                	System.out.println(numBoxes);
-                	System.out.println(challengers);
+//                	System.out.println("column size:"+columns.size());
+//                	System.out.println("challengerindex1:"+challengerIndex);
+//                	System.out.println("i:"+i);
+//                	System.out.println(numBoxes);
+//                	System.out.println(challengers);
                 	
                     columns.set(i, challengers.get(0).get(challengerIndex).fillVBox(columns.get(i)));
                     challengerIndex++;
@@ -156,11 +156,11 @@ public class Main extends Application {
                     System.out.println("challengerindex1:"+challengerIndex);
                     columns.get(i).setSpacing(50);
                 } else if (numTeams == 1) { // added, 5/1/2018 16:20
-                	System.out.println("column size:"+columns.size());
-                	System.out.println("challengerindex1:"+challengerIndex);
-                	System.out.println("i:"+i);
-                	System.out.println(numBoxes);
-                	System.out.println(challengers);
+//                	System.out.println("column size:"+columns.size());
+//                	System.out.println("challengerindex1:"+challengerIndex);
+//                	System.out.println("i:"+i);
+//                	System.out.println(numBoxes);
+//                	System.out.println(challengers);
                 	
                 	columns.set(0, challengers.get(0).get(0).fillVBox(columns.get(0)));
                 }
