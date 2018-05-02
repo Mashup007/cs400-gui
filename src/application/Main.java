@@ -414,6 +414,7 @@ public class Main extends Application {
         }
         
         winnerContent.getChildren().clear();
+<<<<<<< HEAD
         Label firstL = new Label();
         Label secondL = new Label();
         Label thirdL = new Label();
@@ -438,9 +439,10 @@ public class Main extends Application {
             thirdContent.getChildren().clear();
             thirdContent.getChildren().add(thirdL);
         }
+=======
         Label first = new Label();
         first.setAlignment(Pos.CENTER);
         first.setText("1st Place: " + winner.getTeamName() + " Score: "  );
-
+>>>>>>> a0627571c5dfc1722817e4797202711224544627
     }
 }
