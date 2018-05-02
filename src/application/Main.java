@@ -103,7 +103,6 @@ public class Main extends Application {
             challengers.add(new ArrayList<Challenger>());
             challengerContent.add(new ArrayList<HBox>());
         }
-        if (numTeams == 1) {challengers.set(0, seed());} 
         challengers.set(0, seed());
         
         // Fill proceeding slots with nulls
@@ -218,9 +217,11 @@ public class Main extends Application {
 	    ArrayList<Challenger> tempChallengers = new ArrayList<Challenger>();
 	    ArrayList<Challenger> startingChallengers = new ArrayList<Challenger>();
 	    ArrayList<Challenger> onlyoneChallenger = new ArrayList<Challenger>();
+	    
 	    if (numTeams == 1) { 
-	    	onlyoneChallenger.add(new Challenger(randName(0), 1 ));
-	    	return onlyoneChallenger;
+        	    	onlyoneChallenger.add(new Challenger(randName(0), 1 ));
+        	    	onlyoneChallenger.addAll(null);
+        	    	return onlyoneChallenger;
 	    }
 	    for (int i = 0; i < numTeams; i++) {
 	        tempChallengers.add(new Challenger(randName(i), i + 1 ));
@@ -371,6 +372,9 @@ public class Main extends Application {
         if (t1.getTeamScore() < t2.getTeamScore()) {
             winner = t2;
             loser = t1;
+            HBox temp = modifyWinner;
+            modifyWinner = modifyLoser;
+            modifyLoser = temp;
         }
         
         winner.restrictHBox(modifyWinner);
@@ -393,10 +397,26 @@ public class Main extends Application {
         System.out.println("First Place: " + winner.getTeamName());
         System.out.println("Second Place: " + loser.getTeamName());
         
-        
+        updatePlacing(winner, modifyWinner, loser, modifyLoser);
     }
 
     public void updatePlacing(Challenger winner, HBox winnerContent, Challenger second, HBox secondContent) {
+        Challenger third = null;
+        HBox thirdContent = null;
         
+        if (rounds > 1) {
+            for (int i = 0; i < 4; i++) {
+                Challenger p = challengers.get(rounds-2).get(i);
+                if ((third == null && !p.isTeamInGame()) || (!p.isTeamInGame() && third.getTeamScore() < p.getTeamScore())) {
+                    third = p;
+                    thirdContent = challengerContent.get(rounds-2).get(i);
+                }
+            }
+        }
+        
+        winnerContent.getChildren().clear();
+        Label first = new Label();
+        first.setAlignment(Pos.CENTER);
+        first.setText("1st Place: " + winner.getTeamName() + " Score: " + );
     }
 }
