@@ -309,8 +309,72 @@ public class Main extends Application {
 	    winner.setCurrRound(winner.getCurrRound()+1);
 	}
 	
-	private void finalRound() {
-	    System.out.println("Should be final round");
-	}
+   private void finalRound(Challenger winner, Challenger loser) {
+        VBox center = columns.get((columns.size()-1)/2);
+        double colSpace = (double)(win_width)/(rounds*2-1);
+        
+        HBox modifyWinner = null;
+        HBox modifyLoser = null;
+        int numTeamsinRound = 4;
+        
+        for (int i = 0; i < numTeamsinRound; i++) {
+            if (challengers.get(rounds-2).get(i) == winner) {
+                modifyWinner = challengerContent.get(rounds-2).get(i);
+                challengers.get(rounds-1).set(i/2, winner);
+            } else if (challengers.get(rounds-2).get(i) == loser) {
+                modifyLoser = challengerContent.get(rounds-2).get(i);
+            }
+        }
+        
+        if (center.getChildren().size() == 0) {
+            HBox newHBox = new HBox(10);
+            newHBox.setAlignment(Pos.BOTTOM_CENTER);
+            newHBox.setMinSize(colSpace, (double)530/2);
+            newHBox.setMaxSize(colSpace, (double)530/2);
+            winner.fillHBox(newHBox);
+            
+            HBox newHBox2 = new HBox(40);
+            newHBox2.setAlignment(Pos.TOP_CENTER);
+            newHBox2.setMinSize(colSpace, (double)530/2);
+            newHBox2.setMaxSize(colSpace, (double)530/2);
+            
+            center.setSpacing(10);
+            center.getChildren().addAll(newHBox,newHBox2);
+        } else { 
+            HBox lower = (HBox)center.getChildren().get(1);
+            winner.fillHBox(lower);
+        }
+        
+        winner.restictHBox(modifyWinner);
+        loser.restictHBox(modifyLoser);
+        
+        loser.exitTournament();
+        winner.setTeamScore(-1);
+        winner.setOpposition(null);
+        winner.setCurrRound(winner.getCurrRound()+1);
+    }
+    
+    public void determineWinner() {
+        VBox center = columns.get((columns.size()-1)/2);
+        HBox modifyWinner = (HBox)center.getChildren().get(0);
+        HBox modifyLoser = (HBox)center.getChildren().get(1);
+        
+        Challenger t1 = challengers.get(challengers.size()-1).get(0);
+        Challenger t2 = challengers.get(challengers.size()-1).get(1);
+        Challenger winner = t1;
+        Challenger loser = t2;
+        if (t1.getTeamScore() < t2.getTeamScore()) {
+            winner = t2;
+            loser = t1;
+        }
+        
+        winner.restictHBox(modifyWinner);
+        loser.restictHBox(modifyLoser);
+        winner.exitTournament();
+        loser.exitTournament();
+        
+        System.out.println("First Place: " + winner.getTeamName());
+        System.out.println("Second Place: " + loser.getTeamName());
+    }
 
 }
