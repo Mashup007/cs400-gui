@@ -45,7 +45,7 @@ public class Main extends Application {
 	//To make window dimensions more accessible for future use
 	public int win_width = 1200;
 	public int win_height = 600;
-	private int numTeams = 2;
+	private int numTeams = 16;
 	private int rounds;
 	public static int curLine = 0;
 	private ArrayList<ArrayList<Challenger>> challengers;
