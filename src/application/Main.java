@@ -302,8 +302,8 @@ public class Main extends Application {
 	    if (modifyLoser == null) System.out.println("Error, loser not found");
 	    if (destination == null) System.out.println("Error: destination not found");
 	    
-	    winner.restictHBox(modifyWinner);
-	    loser.restictHBox(modifyLoser);
+	    winner.restrictHBox(modifyWinner);
+	    loser.restrictHBox(modifyLoser);
 	    winner.fillHBox(destination);
 	    
 	    loser.exitTournament();
@@ -349,8 +349,8 @@ public class Main extends Application {
             winner.fillHBox(lower);
         }
         
-        winner.restictHBox(modifyWinner);
-        loser.restictHBox(modifyLoser);
+        winner.restrictHBox(modifyWinner);
+        loser.restrictHBox(modifyLoser);
         
         loser.exitTournament();
         winner.setTeamScore(-1);
@@ -372,13 +372,30 @@ public class Main extends Application {
             loser = t1;
         }
         
-        winner.restictHBox(modifyWinner);
-        loser.restictHBox(modifyLoser);
+        winner.restrictHBox(modifyWinner);
+        loser.restrictHBox(modifyLoser);
         winner.exitTournament();
         loser.exitTournament();
         
+        /*
+         * challenger <- Challenger objects
+         * challengerContent <- HBoxes
+         * 
+         * Find challenger from last round who won, make references for 1st and 2nd
+         * Find challengers from second to last round where the current round isn't the last and the top scoring of those is 3rd
+         * Use index found to reference challengerContent HBoxes
+         * 
+         * Clear them and use challenger data to fill them
+         * 
+         */
+        
         System.out.println("First Place: " + winner.getTeamName());
         System.out.println("Second Place: " + loser.getTeamName());
+        
+        
     }
 
+    public void updatePlacing(Challenger winner, HBox winnerContent, Challenger second, HBox secondContent) {
+        
+    }
 }

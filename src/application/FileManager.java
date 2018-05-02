@@ -21,7 +21,7 @@ public class FileManager {
     public static ArrayList<String> loadChallenger(String file) {
 		ArrayList<String> result = new ArrayList<>();
 		try {
-			Scanner sc = new Scanner(new File("D:\\Eclipse files\\cs400-gui\\src\\application\\list.txt"));
+			Scanner sc = new Scanner(new File(file));
 			while (sc.hasNextLine()) {
 				String line = sc.nextLine();
 				

@@ -85,7 +85,7 @@ public class Challenger {
         
     }
     
-    public HBox restictHBox(HBox hbox) {
+    public HBox restrictHBox(HBox hbox) {
         hbox.getChildren().clear();
         
         nameLabel = new Label();
