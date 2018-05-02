@@ -258,26 +258,29 @@ public class Main extends Application {
 	
 	private void submitClicked() {
 	    //for (ArrayList<Challenger> a : challengers) System.out.println(a.size());
-	    int currRound = 1;
-	    for (ArrayList<Challenger> a : challengers) {
-	        for (int i = 0; i < a.size(); i+=2) {
-	            Challenger t1 = a.get(i);
-	            Challenger t2 = a.get(i+1);
-	            if (t1 != null && t2 != null && t1.getTeamScore() != t2.getTeamScore()
-	                    && t1.isTeamInGame() && t2.isTeamInGame() 
-	                    && t1.getTeamScore() != -1 && t2.getTeamScore() != -1
-	                    && t1.getCurrRound() == currRound && t2.getCurrRound() == currRound) {
-	                Challenger winner = t1;
-	                Challenger loser = t2;
-	                if (t1.getTeamScore() < t2.getTeamScore()) { 
-	                    winner = t2;
-	                    loser = t1;
-	                }
-	                tournamentAdvance(currRound, winner, loser, i);
-	            }
-	        }
-	        currRound++;
-	    }
+	    if (challengers.get(challengers.size()-1).get(0) == null || challengers.get(challengers.size()-1).get(1) == null) {
+        	    int currRound = 1;
+        	    for (ArrayList<Challenger> a : challengers) {
+        	        for (int i = 0; i < a.size(); i+=2) {
+        	            Challenger t1 = a.get(i);
+        	            Challenger t2 = a.get(i+1);
+        	            if (t1 != null && t2 != null && t1.getTeamScore() != t2.getTeamScore()
+        	                    && t1.isTeamInGame() && t2.isTeamInGame() 
+        	                    && t1.getTeamScore() != -1 && t2.getTeamScore() != -1
+        	                    && t1.getCurrRound() == currRound && t2.getCurrRound() == currRound) {
+        	                Challenger winner = t1;
+        	                Challenger loser = t2;
+        	                if (t1.getTeamScore() < t2.getTeamScore()) { 
+        	                    winner = t2;
+        	                    loser = t1;
+        	                }
+        	                if (currRound < rounds-1) tournamentAdvance(currRound, winner, loser, i);
+                            else finalRound(winner,loser);
+        	            }
+        	        }
+        	        currRound++;
+        	    }
+	    } else determineWinner();
 	}
 	
 	private void tournamentAdvance(int currRound, Challenger winner, Challenger loser, int index) {
