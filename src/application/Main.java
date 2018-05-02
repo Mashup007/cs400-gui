@@ -89,9 +89,14 @@ public class Main extends Application {
         hbox_bottom.setMinHeight(40);
         hbox_bottom.setMaxHeight(40);
         bracket_layout.setBottom(hbox_bottom);
-
+        
+        if (numTeams == 0) {
+            Scene scene = new Scene(bracket_layout, win_width, win_height);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+            return;
+        }
         //////////////Create Challenger Objects/////////////////
-
         challengers = new ArrayList<ArrayList<Challenger>>();
         challengerContent = new ArrayList<ArrayList<HBox>>();
         for (int i = 0; i < rounds; i++) {
@@ -143,25 +148,12 @@ public class Main extends Application {
                         challengerContent.get(columns.size()-(i+1)).add(newHBox);
                         
                     boxes.add(newHBox);
-                } else if (numTeams == 2) {
-//                	System.out.println("column size:"+columns.size());
-//                	System.out.println("challengerindex1:"+challengerIndex);
-//                	System.out.println("i:"+i);
-//                	System.out.println(numBoxes);
-//                	System.out.println(challengers);
-                	
+                } else if (numTeams == 2) {               	
                     columns.set(i, challengers.get(0).get(challengerIndex).fillVBox(columns.get(i)));
                     challengerIndex++;
                     columns.set(i, challengers.get(0).get(challengerIndex).fillVBox(columns.get(i)));
-                    System.out.println("challengerindex1:"+challengerIndex);
                     columns.get(i).setSpacing(50);
-                } else if (numTeams == 1) { // added, 5/1/2018 16:20
-//                	System.out.println("column size:"+columns.size());
-//                	System.out.println("challengerindex1:"+challengerIndex);
-//                	System.out.println("i:"+i);
-//                	System.out.println(numBoxes);
-//                	System.out.println(challengers);
-                	
+                } else if (numTeams == 1) { 
                 	columns.set(0, challengers.get(0).get(0).fillVBox(columns.get(0)));
                 }
             }
@@ -359,6 +351,12 @@ public class Main extends Application {
     }
     
     public void determineWinner() {
+    	if (numTeams == 2) {
+    		return;
+    	}
+    	if (numTeams == 1) {
+    		return;
+    	}
         VBox center = columns.get((columns.size()-1)/2);
         HBox modifyWinner = (HBox)center.getChildren().get(0);
         HBox modifyLoser = (HBox)center.getChildren().get(1);
