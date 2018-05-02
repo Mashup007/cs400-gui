@@ -250,7 +250,8 @@ public class Main extends Application {
 	
 	private void submitClicked() {
 	    //for (ArrayList<Challenger> a : challengers) System.out.println(a.size());
-	    if (challengers.get(challengers.size()-1).get(0) == null || challengers.get(challengers.size()-1).get(1) == null) {
+		if (challengers.get(challengers.size()-1).get(0) == null) {determineWinner();}
+		else if (challengers.get(challengers.size()-1).get(0) == null || challengers.get(challengers.size()-1).get(1) == null) {
         	    int currRound = 1;
         	    for (ArrayList<Challenger> a : challengers) {
         	        for (int i = 0; i < a.size(); i+=2) {
@@ -352,9 +353,11 @@ public class Main extends Application {
     
     public void determineWinner() {
     	if (numTeams == 2) {
+    		/*******************************/
     		return;
     	}
     	if (numTeams == 1) {
+    		/*******************************/
     		return;
     	}
         VBox center = columns.get((columns.size()-1)/2);
