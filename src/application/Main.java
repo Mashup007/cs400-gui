@@ -96,10 +96,10 @@ public class Main extends Application {
             primaryStage.show();
             return;
         }
-        //////////////Create Challenger Objects/////////////////
+        //////////////////Create Challenger Objects/////////////////
         challengers = new ArrayList<ArrayList<Challenger>>();
         challengerContent = new ArrayList<ArrayList<HBox>>();
-        for (int i = 0; i < rounds; i++) {
+        for (int i = 0; i < rounds; i++) { 
             challengers.add(new ArrayList<Challenger>());
             challengerContent.add(new ArrayList<HBox>());
         }
@@ -124,11 +124,10 @@ public class Main extends Application {
             newCol.setMinSize(colSpace, 530);
             newCol.setAlignment(Pos.CENTER);          
             columns.add(newCol);
-        }
-        
+        }        
         // Add appropriate number of HBoxes to end columns containing Challenger info
         int challengerIndex = 0;
-        for (int i = 0; i < columns.size(); i++) {
+        for (int i = 0; i < columns.size(); i++) { 
             int numBoxes = (int)Math.pow(2,Math.abs(rounds-1-i));
             ArrayList<HBox> boxes = new ArrayList<HBox>();
             for (int j = 0; j < numBoxes; j++) {
@@ -220,7 +219,7 @@ public class Main extends Application {
 	    
 	    if (numTeams == 1) { 
         	    	onlyoneChallenger.add(new Challenger(randName(0), 1 ));
-        	    	onlyoneChallenger.addAll(null);
+        	    	onlyoneChallenger.add(null);
         	    	return onlyoneChallenger;
 	    }
 	    for (int i = 0; i < numTeams; i++) {
@@ -251,7 +250,7 @@ public class Main extends Application {
 	
 	private void submitClicked() {
 	    //for (ArrayList<Challenger> a : challengers) System.out.println(a.size());
-		if (challengers.get(challengers.size()-1).get(0) == null) {determineWinner();}
+		if (challengers.get(challengers.size()-1).get(1) == null) {determineWinner();}
 		else if (challengers.get(challengers.size()-1).get(0) == null || challengers.get(challengers.size()-1).get(1) == null) {
         	    int currRound = 1;
         	    for (ArrayList<Challenger> a : challengers) {
@@ -417,6 +416,6 @@ public class Main extends Application {
         winnerContent.getChildren().clear();
         Label first = new Label();
         first.setAlignment(Pos.CENTER);
-        first.setText("1st Place: " + winner.getTeamName() + " Score: " + );
+        first.setText("1st Place: " + winner.getTeamName() + " Score: "  );
     }
 }
