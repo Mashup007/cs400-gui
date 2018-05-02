@@ -345,6 +345,7 @@ public class Main extends Application {
             center.getChildren().addAll(newHBox,newHBox2);
         } else { 
             HBox lower = (HBox)center.getChildren().get(1);
+            lower.setPadding(new Insets(20,0,0,0));
             winner.fillHBox(lower);
         }
         
