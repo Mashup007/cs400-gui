@@ -414,8 +414,29 @@ public class Main extends Application {
         }
         
         winnerContent.getChildren().clear();
-        Label first = new Label();
-        first.setAlignment(Pos.CENTER);
-        first.setText("1st Place: " + winner.getTeamName() + " Score: " + );
+        Label firstL = new Label();
+        Label secondL = new Label();
+        Label thirdL = new Label();
+        
+        firstL.setAlignment(Pos.CENTER);
+        firstL.setText("1st Place: " + winner.getTeamName() + ", Score: " + winner.getTeamScore());
+        firstL.setStyle("-fx-color: red");
+        winnerContent.getChildren().clear();
+        winnerContent.getChildren().add(firstL);
+        
+        if (second != null) {
+            secondL.setAlignment(Pos.CENTER);
+            secondL.setText("2nd Place: " + second.getTeamName() + ", Score: " + second.getTeamScore());
+            secondL.setStyle("-fx-color: red");
+            secondContent.getChildren().clear();
+            secondContent.getChildren().add(secondL);
+        }
+        if (third != null) {
+            thirdL.setAlignment(Pos.CENTER);
+            thirdL.setText("3rd Place: " + third.getTeamName() + ", Score: " + third.getTeamScore());
+            thirdL.setStyle("-fx-color: red");
+            thirdContent.getChildren().clear();
+            thirdContent.getChildren().add(thirdL);
+        }
     }
 }
