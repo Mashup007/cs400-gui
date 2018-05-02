@@ -110,6 +110,7 @@ public class Main extends Application {
         // Split Center by Horizontally Ordered VBoxes
         HBox central = new HBox(); // VBox columns stored in here
         
+        // create columns of VBoxes
         double colSpace = (double)(win_width)/(rounds*2-1);
         columns = new ArrayList<VBox>();
         for (int i = 0; i < rounds*2-1; i++) {
@@ -154,7 +155,7 @@ public class Main extends Application {
                     columns.set(i, challengers.get(0).get(challengerIndex).fillVBox(columns.get(i)));
                     System.out.println("challengerindex1:"+challengerIndex);
                     columns.get(i).setSpacing(50);
-                } else if (numTeams == 1) { // added, 5/1/2018 16:20
+                } else if (numTeams == 1) {
 //                  System.out.println("column size:"+columns.size());
 //                  System.out.println("challengerindex1:"+challengerIndex);
 //                  System.out.println("i:"+i);
@@ -197,7 +198,6 @@ public class Main extends Application {
                 bracket_layout.getChildren().add(line);
             }
         }
-        else determineWinner();
     } 
     
    private static Line[] addBrack(Line[] lines, double x, double y, double line_height, double line_width, int rounds) {
@@ -362,6 +362,7 @@ public class Main extends Application {
     
     public void determineWinner() {
         VBox center = columns.get((columns.size()-1)/2);
+        System.out.println(center.getChildren().get(0) instanceof HBox);
         HBox modifyWinner = (HBox)center.getChildren().get(0);
         HBox modifyLoser = (HBox)center.getChildren().get(1);
         
@@ -408,7 +409,7 @@ public class Main extends Application {
         if (rounds > 1) {
             for (int i = 0; i < 4; i++) {
                 Challenger p = challengers.get(rounds-2).get(i);
-                if ((third == null && !p.isTeamInGame()) || (!p.isTeamInGame() && third.getTeamScore() < p.getTeamScore())) {
+                if ((third == null && p.getCurrRound() != rounds) || (p.getCurrRound() != rounds && third.getTeamScore() < p.getTeamScore())) {
                     third = p;
                     thirdContent = challengerContent.get(rounds-2).get(i);
                 }
