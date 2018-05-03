@@ -91,7 +91,12 @@ public class Main extends Application {
         bracket_layout.setBottom(hbox_bottom);
 
         //////////////Create Challenger Objects/////////////////
-
+        // Set up the scene(framework)
+        Scene scene = new Scene(bracket_layout, win_width, win_height);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        if (numTeams==0) {return;}
+        
         challengers = new ArrayList<ArrayList<Challenger>>();
         challengerContent = new ArrayList<ArrayList<HBox>>();
         for (int i = 0; i < rounds; i++) {
@@ -163,11 +168,6 @@ public class Main extends Application {
         System.out.println(columns.size());
         central.getChildren().addAll(columns);
         bracket_layout.setCenter(central);
-        
-        // Set up the scene(framework)
-        Scene scene = new Scene(bracket_layout, win_width, win_height);
-        primaryStage.setScene(scene);
-        primaryStage.show();
         
         //////////////// Creates Lines Independent of (H/V)Boxes ////////////////////////
         //Holds all the lines needed to create bracket
