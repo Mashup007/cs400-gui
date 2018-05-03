@@ -341,7 +341,7 @@ public class Main extends Application {
                                 winner = t2;
                                 loser = t1;
                             }
-                            if (currRound < rounds-1) tournamentAdvance(currRound, winner, loser, i);
+                            if (currRound < rounds-1) tournamentAdvance(currRound, winner, loser);
                             else finalRound(winner,loser);
                         }
                     }
