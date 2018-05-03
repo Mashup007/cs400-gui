@@ -359,7 +359,6 @@ public class Main extends Application {
     
     public void determineWinner() {
         VBox center = columns.get((columns.size()-1)/2);
-        System.out.println(center.getChildren().get(0) instanceof HBox);
         HBox modifyWinner = (HBox)center.getChildren().get(0);
         HBox modifyLoser = (HBox)center.getChildren().get(1);
         
@@ -419,22 +418,19 @@ public class Main extends Application {
         Label thirdL = new Label();
         
         firstL.setAlignment(Pos.CENTER);
-        firstL.setText("1st Place: " + winner.getTeamName() + ", Score: " + winner.getTeamScore());
-        firstL.setStyle("-fx-color: red");
+        firstL.setText("1st: " + winner.getTeamName() + ", Score: " + winner.getTeamScore());
         winnerContent.getChildren().clear();
         winnerContent.getChildren().add(firstL);
         
         if (second != null) {
             secondL.setAlignment(Pos.CENTER);
-            secondL.setText("2nd Place: " + second.getTeamName() + ", Score: " + second.getTeamScore());
-            secondL.setStyle("-fx-color: red");
+            secondL.setText("2nd: " + second.getTeamName() + ", Score: " + second.getTeamScore());
             secondContent.getChildren().clear();
             secondContent.getChildren().add(secondL);
         }
         if (third != null) {
             thirdL.setAlignment(Pos.CENTER);
-            thirdL.setText("3rd Place: " + third.getTeamName() + ", Score: " + third.getTeamScore());
-            thirdL.setStyle("-fx-color: red");
+            thirdL.setText("3rd: " + third.getTeamName() + ", Score: " + third.getTeamScore());
             thirdContent.getChildren().clear();
             thirdContent.getChildren().add(thirdL);
         }
