@@ -357,11 +357,17 @@ public class Main extends Application {
      * @param loser: Losing challenger from previous round
      */
     private void tournamentAdvance(int currRound, Challenger winner, Challenger loser) {
-        HBox modifyWinner = null;
+        //To remove text entries from current rounds
+        HBox modifyWinner = null; 
         HBox modifyLoser = null;
+        //New hBox for advancing challenger
         HBox destination = null;
+        //Number of teams in current round
         int numTeamsinRound = numTeams/(int)Math.pow(2, currRound-1);
         
+        //For each set of opposing teams, if the teams have played their game and one has advanced
+        //Initialize new information for new box for winning challenger and removal of text entries
+        //From previous round
         for (int i = 0; i < numTeamsinRound; i++) {
             if (challengers.get(currRound-1).get(i) == winner) {
                 modifyWinner = challengerContent.get(currRound-1).get(i);
@@ -371,24 +377,33 @@ public class Main extends Application {
                 modifyLoser = challengerContent.get(currRound-1).get(i);
             }
         }
+        //In the case that something goes wrong (ex. teams tie)
         if (modifyWinner == null) System.out.println("Error, winner not found");
         if (modifyLoser == null) System.out.println("Error, loser not found");
         if (destination == null) System.out.println("Error: destination not found");
         
+        //Removing text entries from previous round and drawing info and new text entry for winner
+        //in following round
         winner.restrictHBox(modifyWinner);
         loser.restrictHBox(modifyLoser);
         winner.fillHBox(destination);
-        
+        //Removing loser from tournament
         loser.exitTournament();
+        //Initializing information for next round for winner
         winner.setTeamScore(-1);
         winner.setOpposition(null);
         winner.setCurrRound(winner.getCurrRound()+1);
     }
     
-   private void finalRound(Challenger winner, Challenger loser) {
+    /**
+     * Special method for semi-final round as it doesn't fit in the algorithm we created for other rounds
+     * @param winner: winner of finals
+     * @param loser: loser of finals
+     */
+    private void finalRound(Challenger winner, Challenger loser) {
         VBox center = columns.get((columns.size()-1)/2);
         double colSpace = (double)(win_width)/(rounds*2-1);
-        
+        //Following same basic algorithm as tournamentAdvance
         HBox modifyWinner = null;
         HBox modifyLoser = null;
         int numTeamsinRound = 4;
@@ -402,6 +417,7 @@ public class Main extends Application {
             }
         }
         
+        //Drawing information in correct locations for semi-finals
         if (center.getChildren().size() == 0) {
             HBox newHBox = new HBox(10);
             newHBox.setAlignment(Pos.BOTTOM_CENTER);
@@ -421,7 +437,7 @@ public class Main extends Application {
             lower.setPadding(new Insets(20,0,0,0));
             winner.fillHBox(lower);
         }
-        
+        //Same basic principal as other rounds
         winner.restrictHBox(modifyWinner);
         loser.restrictHBox(modifyLoser);
         
@@ -430,7 +446,9 @@ public class Main extends Application {
         winner.setOpposition(null);
         winner.setCurrRound(winner.getCurrRound()+1);
     }
-    
+    /**
+     * Determines winners of final round
+     */
     public void determineWinner() {
         VBox center = columns.get((columns.size()-1)/2);
         HBox modifyWinner = (HBox)center.getChildren().get(0);
@@ -459,8 +477,15 @@ public class Main extends Application {
       
         updatePlacing(winner, modifyWinner, loser, modifyLoser);
     }
-
+    /**
+     * Draws first, second, and third place of tournament
+     * @param winner: winning challenger
+     * @param winnerContent: hbox for drawing information for winner
+     * @param second: second place challenger
+     * @param secondContent: hbox for second place
+     */
     public void updatePlacing(Challenger winner, HBox winnerContent, Challenger second, HBox secondContent) {
+        //Same as parameters for winner and second but for third place
         Challenger third = null;
         HBox thirdContent = null;
         
