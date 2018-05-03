@@ -401,7 +401,7 @@ public class Main extends Application {
         Label thirdL = new Label();
         
         firstL.setAlignment(Pos.CENTER);
-        firstL.setText("1st: " + winner.getTeamName() + "\n  Score: " + winner.getTeamScore());
+        firstL.setText("Champion: " + winner.getTeamName() + "\n  Score: " + winner.getTeamScore());
         winnerContent.getChildren().clear();
         winnerContent.getChildren().add(firstL);
         
