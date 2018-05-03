@@ -165,7 +165,6 @@ public class Main extends Application {
         }
         
         // Add finished columns to central layout
-        System.out.println(columns.size());
         central.getChildren().addAll(columns);
         bracket_layout.setCenter(central);
         
