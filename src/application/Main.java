@@ -325,6 +325,8 @@ public class Main extends Application {
         //for (ArrayList<Challenger> a : challengers) System.out.println(a.size());
         if (challengers.get(challengers.size()-1).get(0) == null || challengers.get(challengers.size()-1).get(1) == null) {
                 int currRound = 1;
+                //Check entry boxes for each set of opposing challengers, if they are filled use
+                //scores to determine which team advances and advance them using tournamentAdvance
                 for (ArrayList<Challenger> a : challengers) {
                     for (int i = 0; i < a.size(); i+=2) {
                         Challenger t1 = a.get(i);
@@ -348,7 +350,13 @@ public class Main extends Application {
         } else determineWinner();
     }
     
-    private void tournamentAdvance(int currRound, Challenger winner, Challenger loser, int index) {
+    /**
+     * Removes entry box for loser, draws new entry box and challenger name on next level of bracket for winner
+     * @param currRound: Current round of tournament
+     * @param winner: Winning challenger from previous round
+     * @param loser: Losing challenger from previous round
+     */
+    private void tournamentAdvance(int currRound, Challenger winner, Challenger loser) {
         HBox modifyWinner = null;
         HBox modifyLoser = null;
         HBox destination = null;
