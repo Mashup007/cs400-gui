@@ -58,14 +58,14 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class Challenger {
-    private String teamName;
-    private Integer teamRank;
-    private Integer teamScore;
-    private boolean teamInGame = true;
-    private Challenger opposition;
-    private TextField scoreField;
-    private Label nameLabel;
-    private int currRound;
+    private String teamName; //Challenger name
+    private Integer teamRank; //Challenger seed
+    private Integer teamScore; //Score of most recent matchup
+    private boolean teamInGame = true; //Boolean determining if team is still in the tournament
+    private Challenger opposition; //Opposing challenger
+    private TextField scoreField; //Text Entry for FX
+    private Label nameLabel; //Label to display name
+    private int currRound; //Challenger's current round
     
     /**
      * Basic constructor, initializes teamName, teamRank, and teamInGame.
@@ -80,46 +80,62 @@ public class Challenger {
         currRound = 1;
     }
     
+    /**
+     * Fills hBox with team name and text entry for score
+     * @param hbox to be filled
+     * @return hbox after it's been filled
+     */
     public HBox fillHBox(HBox hbox) {
-
+        //Adding label
         nameLabel = new Label();
         nameLabel.setAlignment(Pos.CENTER);
         nameLabel.setText(teamName);
-        
+        //Adding text entry
         scoreField = new TextField();
         scoreField.setPromptText("Score");
         scoreField.setMaxSize(60, 30);
         scoreField.setMinSize(60, 30);
+        //For getting user-inputted score
         scoreField.textProperty().addListener((obs, oldText, newText) -> {
             try {
                 if (newText == "") teamScore = 0;
                 else teamScore = Integer.parseInt(newText);
             } catch (Exception e) {}
         });
-        
+        //Adding everything to hbox
         hbox.getChildren().addAll(nameLabel, scoreField);
         
         return hbox;
         
     }
     
+    /**
+     * For when the current round is completed, remove text entry and replace with score
+     * @param hbox: hbox with text entry
+     * @return hbox with static score
+     */
     public HBox restrictHBox(HBox hbox) {
+        //Clearing hbox
         hbox.getChildren().clear();
-        
+        //Add name
         nameLabel = new Label();
         nameLabel.setAlignment(Pos.CENTER);
         nameLabel.setText(teamName);
-        
+        //Adding static score
         Label s = new Label();
         s.setText(teamScore.toString());
         s.setMaxSize(60, 30);
         s.setMinSize(60, 30);
-        
+        //Adding above to hbox
         hbox.getChildren().addAll(nameLabel, s);
         
         return hbox;
     }
-    
+    /**
+     * Same as hbox fill method, but for vBoxes
+     * @param vbox: vbox to be filled
+     * @return vbox after being filled with teamname and text entry for score
+     */
     public VBox fillVBox(VBox vbox) {
         nameLabel = new Label();
         nameLabel.setAlignment(Pos.CENTER);
@@ -141,30 +157,46 @@ public class Challenger {
         return vbox;
     }
     
+    /**
+     * Getter for current round
+     * @return: returns current round
+     */
     public int getCurrRound() {
         return currRound;
     }
-
+    /**
+     * Setter for current round
+     * @param currRound: new currRound
+     */
     public void setCurrRound(int currRound) {
         this.currRound = currRound;
     }
-
+    
+    /**
+     * Getter for opposing challenger
+     * @return returns opposing challenger
+     */
     public Challenger getOpposition() {
         return opposition;
     }
-
+    /**
+     * Setter for opposing challenger
+     * @param opposition: new opposition
+     */
     public void setOpposition(Challenger opposition) {
         this.opposition = opposition;
     }
 
     /**
-     * @return teamName
+     * Getter for team name
+     * @return team name
      */
     public String getTeamName() {
         return teamName;
     }
     
     /**
+     * Getter for team rank
      * @return teamRank
      */
     public Integer getTeamRank() {
@@ -172,6 +204,7 @@ public class Challenger {
     }
 
     /**
+     * Getter for team score
      * @return teamScore
      */
     public Integer getTeamScore() {
@@ -203,3 +236,4 @@ public class Challenger {
     }
 
 }
+

@@ -68,25 +68,38 @@ public class Main extends Application {
     //To make window dimensions more accessible for future use
     public int win_width = 1200; 
     public int win_height = 600;
-    
+    //Getting number of teams from number of lines in file
     private int numTeams = number_of_Teams();
     private int rounds;
+    //Used to create bracket lines
     public static int curLine = 0;
+    //2D ArrayList to hold challengers for each round
     private ArrayList<ArrayList<Challenger>> challengers;
+    //2D ArrayList to hold horizontal boxes for drawing challenger information and entry fields
     private ArrayList<ArrayList<HBox>> challengerContent;
+    //Arraylist of vertical boxes to hold HBoxes
     private ArrayList<VBox> columns;
-    public static int rank = 0;
+    
+    //File path
     public static String path;
     
-    
+    /**
+     * Getting file path, and opening file for reading
+     * @param args: command line arguments
+     */
     public static void main(String[] args) {
-        path = args[0];
-        launch(args);
+        path = args[0]; //Initializing input file path
+        launch(args); 
     }
 
     @Override
+    /**
+     * FX runner
+     * primaryStage: Base-level pane
+     */
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Tournament");
+        //Initializing number of rounds
         if (numTeams == 1) {rounds = 1;}
         else { rounds = (int)(Math.log10(numTeams)/Math.log10(2)); }
         //Creating the general layout (Using BorderPane)
@@ -190,7 +203,7 @@ public class Main extends Application {
         central.getChildren().addAll(columns);
         bracket_layout.setCenter(central);
         
-        //////////////// Creates Lines Independent of (H/V)Boxes ////////////////////////
+        //////////////// Creates Bracket Lines Independent of (H/V)Boxes ////////////////////////
         //Holds all the lines needed to create bracket
         Line[] lines = new Line[getNumLines(numTeams)];
         double line_height = (win_height-70)/2; // Fit to center height
@@ -213,43 +226,70 @@ public class Main extends Application {
         }
     } 
     
-   private static Line[] addBrack(Line[] lines, double x, double y, double line_height, double line_width, int rounds) {
+    /**
+     * Recursive method for drawing brackets
+     * @param lines: array of lines
+     * @param x: x coord to start bracket
+     * @param y: y coord to start bracket
+     * @param line_height: height of lines to be drawn
+     * @param line_width: width of lines to be drawn
+     * @param rounds: Number of rounds 
+     * @return lines array after lines for new bracket have been added to it
+     */
+    private static Line[] addBrack(Line[] lines, double x, double y, double line_height, double line_width, int rounds) {
+        //To make line creating statements more concise
         double bot = y+line_height/2;
         double top = y-line_height/2;
         double h_end = x+line_width;
-        //vert
-        lines[++curLine] = new Line(x, top, x, bot);
-        lines[++curLine] = new Line(x, top, h_end, top);
-        lines[++curLine] = new Line(x, bot, h_end, bot);
+        
+        lines[++curLine] = new Line(x, top, x, bot); //Vertical line
+        lines[++curLine] = new Line(x, top, h_end, top); //Top horizontal line
+        lines[++curLine] = new Line(x, bot, h_end, bot); //Bottom horizontal line
+        
+        //Recursive call
         if (rounds != 1) {
             lines = addBrack(lines, h_end, bot, line_height/2, line_width, rounds-1);
             return addBrack(lines, h_end, top, line_height/2, line_width, rounds-1);
-        } else {
+        } 
+        //Base case
+        else {
             return lines;
         }
     }
    
+    /**
+     * Returns the number of lines needed to draw a tournament bracket for a given number
+     * of teams
+     * @param numTeams: Number of teams
+     * @return total number of lines needed to draw tournament bracket
+     */
     private static int getNumLines(int numTeams) {
-        if (numTeams == 2 ) return 1;
-        if (numTeams == 1) return 0 ;
+        if (numTeams == 2 ) return 1; //Only one line needed
+        if (numTeams == 1) return 0 ;//No lines need to be drawn
+        //Math
         else return 3*(numTeams/2)+getNumLines(numTeams/2);
     }
-    
+    /**
+     * Seeds tournament based on challenger positions in file
+     * @return ArrayList of challengers for tournament
+     */
     private ArrayList<Challenger> seed() {  
         ArrayList<Challenger> tempChallengers = new ArrayList<Challenger>();
         ArrayList<Challenger> startingChallengers = new ArrayList<Challenger>();
         ArrayList<Challenger> onlyoneChallenger = new ArrayList<Challenger>();
         
+        //One team case
         if (numTeams == 1) { 
                     onlyoneChallenger.add(new Challenger(randName(0), 1 ));
                     onlyoneChallenger.add(null);
                     return onlyoneChallenger;
         }
+        //Multiple teams case
         for (int i = 0; i < numTeams; i++) {
             tempChallengers.add(new Challenger(randName(i), i + 1 ));
            
         }
-        // seed opposition
+        // seeding opposition
         for (int i = 0; i < numTeams/2; i++) {
             tempChallengers.get(i).setOpposition(tempChallengers.get(numTeams-1-i));
             tempChallengers.get(numTeams-1-i).setOpposition(tempChallengers.get(i));
@@ -260,21 +300,36 @@ public class Main extends Application {
         return startingChallengers;
     }
     
+    /**
+     * Gets number of teams for tournament from file 
+     * @return number of teams
+     */
     private int number_of_Teams() {
         int numTeam = 0;
         numTeam = FileManager.loadChallenger(path).size();
         return numTeam;
     }
-    private String randName(int x) {        
+    
+    /**
+     * Getting challenger name from file
+     * @param index: the challenger's index in the array of challengers
+     * @return challenger name
+     */
+    private String randName(int index) {        
         String name = new String(); 
-        name = FileManager.loadChallenger(path).get(x);
+        name = FileManager.loadChallenger(path).get(index);
         return name;
     }
     
+    /**
+     * Called when user clicks submit
+     */
     private void submitClicked() {
         //for (ArrayList<Challenger> a : challengers) System.out.println(a.size());
         if (challengers.get(challengers.size()-1).get(0) == null || challengers.get(challengers.size()-1).get(1) == null) {
                 int currRound = 1;
+                //Check entry boxes for each set of opposing challengers, if they are filled use
+                //scores to determine which team advances and advance them using tournamentAdvance
                 for (ArrayList<Challenger> a : challengers) {
                     for (int i = 0; i < a.size(); i+=2) {
                         Challenger t1 = a.get(i);
@@ -289,7 +344,7 @@ public class Main extends Application {
                                 winner = t2;
                                 loser = t1;
                             }
-                            if (currRound < rounds-1) tournamentAdvance(currRound, winner, loser, i);
+                            if (currRound < rounds-1) tournamentAdvance(currRound, winner, loser);
                             else finalRound(winner,loser);
                         }
                     }
@@ -298,12 +353,24 @@ public class Main extends Application {
         } else determineWinner();
     }
     
-    private void tournamentAdvance(int currRound, Challenger winner, Challenger loser, int index) {
-        HBox modifyWinner = null;
+    /**
+     * Removes entry box for loser, draws new entry box and challenger name on next level of bracket for winner
+     * @param currRound: Current round of tournament
+     * @param winner: Winning challenger from previous round
+     * @param loser: Losing challenger from previous round
+     */
+    private void tournamentAdvance(int currRound, Challenger winner, Challenger loser) {
+        //To remove text entries from current rounds
+        HBox modifyWinner = null; 
         HBox modifyLoser = null;
+        //New hBox for advancing challenger
         HBox destination = null;
+        //Number of teams in current round
         int numTeamsinRound = numTeams/(int)Math.pow(2, currRound-1);
         
+        //For each set of opposing teams, if the teams have played their game and one has advanced
+        //Initialize new information for new box for winning challenger and removal of text entries
+        //From previous round
         for (int i = 0; i < numTeamsinRound; i++) {
             if (challengers.get(currRound-1).get(i) == winner) {
                 modifyWinner = challengerContent.get(currRound-1).get(i);
@@ -313,24 +380,33 @@ public class Main extends Application {
                 modifyLoser = challengerContent.get(currRound-1).get(i);
             }
         }
+        //In the case that something goes wrong (ex. teams tie)
         if (modifyWinner == null) System.out.println("Error, winner not found");
         if (modifyLoser == null) System.out.println("Error, loser not found");
         if (destination == null) System.out.println("Error: destination not found");
         
+        //Removing text entries from previous round and drawing info and new text entry for winner
+        //in following round
         winner.restrictHBox(modifyWinner);
         loser.restrictHBox(modifyLoser);
         winner.fillHBox(destination);
-        
+        //Removing loser from tournament
         loser.exitTournament();
+        //Initializing information for next round for winner
         winner.setTeamScore(-1);
         winner.setOpposition(null);
         winner.setCurrRound(winner.getCurrRound()+1);
     }
     
-   private void finalRound(Challenger winner, Challenger loser) {
+    /**
+     * Special method for semi-final round as it doesn't fit in the algorithm we created for other rounds
+     * @param winner: winner of finals
+     * @param loser: loser of finals
+     */
+    private void finalRound(Challenger winner, Challenger loser) {
         VBox center = columns.get((columns.size()-1)/2);
         double colSpace = (double)(win_width)/(rounds*2-1);
-        
+        //Following same basic algorithm as tournamentAdvance
         HBox modifyWinner = null;
         HBox modifyLoser = null;
         int numTeamsinRound = 4;
@@ -344,6 +420,7 @@ public class Main extends Application {
             }
         }
         
+        //Drawing information in correct locations for semi-finals
         if (center.getChildren().size() == 0) {
             HBox newHBox = new HBox(10);
             newHBox.setAlignment(Pos.BOTTOM_CENTER);
@@ -363,7 +440,7 @@ public class Main extends Application {
             lower.setPadding(new Insets(20,0,0,0));
             winner.fillHBox(lower);
         }
-        
+        //Same basic principal as other rounds
         winner.restrictHBox(modifyWinner);
         loser.restrictHBox(modifyLoser);
         
@@ -372,7 +449,9 @@ public class Main extends Application {
         winner.setOpposition(null);
         winner.setCurrRound(winner.getCurrRound()+1);
     }
-    
+    /**
+     * Determines winners of final round
+     */
     public void determineWinner() {
         VBox center = columns.get((columns.size()-1)/2);
         HBox modifyWinner = (HBox)center.getChildren().get(0);
@@ -401,8 +480,15 @@ public class Main extends Application {
       
         updatePlacing(winner, modifyWinner, loser, modifyLoser);
     }
-
+    /**
+     * Draws first, second, and third place of tournament
+     * @param winner: winning challenger
+     * @param winnerContent: hbox for drawing information for winner
+     * @param second: second place challenger
+     * @param secondContent: hbox for second place
+     */
     public void updatePlacing(Challenger winner, HBox winnerContent, Challenger second, HBox secondContent) {
+        //Same as parameters for winner and second but for third place
         Challenger third = null;
         HBox thirdContent = null;
         
