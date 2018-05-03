@@ -134,7 +134,7 @@ public class Main extends Application {
         
         challengers = new ArrayList<ArrayList<Challenger>>();
         challengerContent = new ArrayList<ArrayList<HBox>>();
-        for (int i = 0; i < rounds; i++) {
+        for (int i = 0; i < rounds; i++) { // hboxes for challenger contents 
             challengers.add(new ArrayList<Challenger>());
             challengerContent.add(new ArrayList<HBox>());
         }
@@ -204,12 +204,13 @@ public class Main extends Application {
         bracket_layout.setCenter(central);
         
         //////////////// Creates Bracket Lines Independent of (H/V)Boxes ////////////////////////
-        //Holds all the lines needed to create bracket
+        
+        // Holds all the lines needed to create bracket
         Line[] lines = new Line[getNumLines(numTeams)];
         double line_height = (win_height-70)/2; // Fit to center height
         double line_width = (win_width)/(rounds*2-1); // Fit to window width
-        //Center line
-        if (numTeams != 1) { //added 5/1/2018
+        // Center line
+        if (numTeams != 1) { 
             lines[0] = new Line(600-line_width/2, 312, 600+line_width/2, 310); 
             if (lines.length != 1) {
                 lines = addBrack(lines, 600+line_width/2, 312, line_height, line_width, rounds-1);
@@ -269,6 +270,7 @@ public class Main extends Application {
         //Math
         else return 3*(numTeams/2)+getNumLines(numTeams/2);
     }
+    
     /**
      * Seeds tournament based on challenger positions in file
      * @return ArrayList of challengers for tournament
@@ -325,7 +327,6 @@ public class Main extends Application {
      * Called when user clicks submit
      */
     private void submitClicked() {
-        //for (ArrayList<Challenger> a : challengers) System.out.println(a.size());
         if (challengers.get(challengers.size()-1).get(0) == null || challengers.get(challengers.size()-1).get(1) == null) {
                 int currRound = 1;
                 //Check entry boxes for each set of opposing challengers, if they are filled use
@@ -492,7 +493,7 @@ public class Main extends Application {
         Challenger third = null;
         HBox thirdContent = null;
         
-        if (rounds > 1) {
+        if (rounds > 1) { // round>1 means at least 4 teams involved, this handles the third place
             for (int i = 0; i < 4; i++) {
                 Challenger p = challengers.get(rounds-2).get(i);
                 if ((third == null && p.getCurrRound() != rounds) || (p.getCurrRound() != rounds && third.getTeamScore() < p.getTeamScore())) {
