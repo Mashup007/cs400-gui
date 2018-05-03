@@ -9,8 +9,11 @@
 //					 Zidong Zhang
 //					 Shuyan Zhang
 //					 Chao Wang
-// Email:            tmandalapu@wisc.edu 
-//					 
+// Email:            
+//					 tmandalapu@wisc.edu 
+//                   zzhang773@wisc.edu
+//					 szhang399@wisc.edu
+//                   cwang573@wisc.edu
 // Lecturer's Name:  Debra Deppeler
 // Source Credits:   StackOverflow
 // Known Bugs:       Final round of competition has weird gap between team
