@@ -58,25 +58,38 @@ public class Main extends Application {
     //To make window dimensions more accessible for future use
     public int win_width = 1200; 
     public int win_height = 600;
-    
+    //Getting number of teams from number of lines in file
     private int numTeams = number_of_Teams();
     private int rounds;
+    //Used to create bracket lines
     public static int curLine = 0;
+    //2D ArrayList to hold challengers for each round
     private ArrayList<ArrayList<Challenger>> challengers;
+    //2D ArrayList to hold horizontal boxes for drawing challenger information and entry fields
     private ArrayList<ArrayList<HBox>> challengerContent;
+    //Arraylist of vertical boxes to hold HBoxes
     private ArrayList<VBox> columns;
-    public static int rank = 0;
+    
+    //File path
     public static String path;
     
-    
+    /**
+     * Getting file path, and opening file for reading
+     * @param args: command line arguments
+     */
     public static void main(String[] args) {
-        path = args[0];
-        launch(args);
+        path = args[0]; //Initializing input file path
+        launch(args); 
     }
 
     @Override
+    /**
+     * FX runner
+     * primaryStage: Base-level pane
+     */
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Tournament");
+        //Initializing number of rounds
         if (numTeams == 1) {rounds = 1;}
         else { rounds = (int)(Math.log10(numTeams)/Math.log10(2)); }
         //Creating the general layout (Using BorderPane)
@@ -180,7 +193,7 @@ public class Main extends Application {
         central.getChildren().addAll(columns);
         bracket_layout.setCenter(central);
         
-        //////////////// Creates Lines Independent of (H/V)Boxes ////////////////////////
+        //////////////// Creates Bracket Lines Independent of (H/V)Boxes ////////////////////////
         //Holds all the lines needed to create bracket
         Line[] lines = new Line[getNumLines(numTeams)];
         double line_height = (win_height-70)/2; // Fit to center height
@@ -203,7 +216,7 @@ public class Main extends Application {
         }
     } 
     
-   private static Line[] addBrack(Line[] lines, double x, double y, double line_height, double line_width, int rounds) {
+    private static Line[] addBrack(Line[] lines, double x, double y, double line_height, double line_width, int rounds) {
         double bot = y+line_height/2;
         double top = y-line_height/2;
         double h_end = x+line_width;
