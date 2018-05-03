@@ -223,43 +223,70 @@ public class Main extends Application {
         }
     } 
     
+    /**
+     * Recursive method for drawing brackets
+     * @param lines: array of lines
+     * @param x: x coord to start bracket
+     * @param y: y coord to start bracket
+     * @param line_height: height of lines to be drawn
+     * @param line_width: width of lines to be drawn
+     * @param rounds: Number of rounds 
+     * @return lines array after lines for new bracket have been added to it
+     */
     private static Line[] addBrack(Line[] lines, double x, double y, double line_height, double line_width, int rounds) {
+        //To make line creating statements more concise
         double bot = y+line_height/2;
         double top = y-line_height/2;
         double h_end = x+line_width;
-        //vert
-        lines[++curLine] = new Line(x, top, x, bot);
-        lines[++curLine] = new Line(x, top, h_end, top);
-        lines[++curLine] = new Line(x, bot, h_end, bot);
+        
+        lines[++curLine] = new Line(x, top, x, bot); //Vertical line
+        lines[++curLine] = new Line(x, top, h_end, top); //Top horizontal line
+        lines[++curLine] = new Line(x, bot, h_end, bot); //Bottom horizontal line
+        
+        //Recursive call
         if (rounds != 1) {
             lines = addBrack(lines, h_end, bot, line_height/2, line_width, rounds-1);
             return addBrack(lines, h_end, top, line_height/2, line_width, rounds-1);
-        } else {
+        } 
+        //Base case
+        else {
             return lines;
         }
     }
    
+    /**
+     * Returns the number of lines needed to draw a tournament bracket for a given number
+     * of teams
+     * @param numTeams: Number of teams
+     * @return total number of lines needed to draw tournament bracket
+     */
     private static int getNumLines(int numTeams) {
-        if (numTeams == 2 ) return 1;
-        if (numTeams == 1) return 0 ;
+        if (numTeams == 2 ) return 1; //Only one line needed
+        if (numTeams == 1) return 0 ;//No lines need to be drawn
+        //Math
         else return 3*(numTeams/2)+getNumLines(numTeams/2);
     }
-    
+    /**
+     * Seeds tournament based on challenger positions in file
+     * @return ArrayList of challengers for tournament
+     */
     private ArrayList<Challenger> seed() {  
         ArrayList<Challenger> tempChallengers = new ArrayList<Challenger>();
         ArrayList<Challenger> startingChallengers = new ArrayList<Challenger>();
         ArrayList<Challenger> onlyoneChallenger = new ArrayList<Challenger>();
         
+        //One team case
         if (numTeams == 1) { 
                     onlyoneChallenger.add(new Challenger(randName(0), 1 ));
                     onlyoneChallenger.add(null);
                     return onlyoneChallenger;
         }
+        //Multiple teams case
         for (int i = 0; i < numTeams; i++) {
             tempChallengers.add(new Challenger(randName(i), i + 1 ));
            
         }
-        // seed opposition
+        // seeding opposition
         for (int i = 0; i < numTeams/2; i++) {
             tempChallengers.get(i).setOpposition(tempChallengers.get(numTeams-1-i));
             tempChallengers.get(numTeams-1-i).setOpposition(tempChallengers.get(i));
@@ -270,17 +297,30 @@ public class Main extends Application {
         return startingChallengers;
     }
     
+    /**
+     * Gets number of teams for tournament from file 
+     * @return number of teams
+     */
     private int number_of_Teams() {
         int numTeam = 0;
         numTeam = FileManager.loadChallenger(path).size();
         return numTeam;
     }
-    private String randName(int x) {        
+    
+    /**
+     * Getting challenger name from file
+     * @param index: the challenger's index in the array of challengers
+     * @return challenger name
+     */
+    private String randName(int index) {        
         String name = new String(); 
-        name = FileManager.loadChallenger(path).get(x);
+        name = FileManager.loadChallenger(path).get(index);
         return name;
     }
     
+    /**
+     * Called when user clicks submit
+     */
     private void submitClicked() {
         //for (ArrayList<Challenger> a : challengers) System.out.println(a.size());
         if (challengers.get(challengers.size()-1).get(0) == null || challengers.get(challengers.size()-1).get(1) == null) {
