@@ -1,3 +1,14 @@
+///////////////////////////////////////////////////////////////////////////////
+// Title:            P2 (Implemented Using AVL Tree)
+// Files:            BalancedSearchTree.java, TestSearchTree.java, SearchTreeADT.java
+// Semester:         CS 400 Spring 2018
+//
+// Authors:          Matt Zimmers, Tarun Mandalapu
+// Email:            tmandalapu@wisc.edu
+// Lecturer's Name:  Debra Deppeler
+// Source Credits:   https://pages.cs.wisc.edu/~deppeler/cs400/readings/AVL-Trees/index.html
+// Known Bugs:       TODO
+///////////////////////////////////////////////////////////////////////////////
 package application;
 
 import java.awt.event.MouseEvent;
@@ -45,8 +56,9 @@ import javafx.scene.text.TextAlignment;
 
 public class Main extends Application {
     //To make window dimensions more accessible for future use
-    public int win_width = 1200;
+    public int win_width = 1200; 
     public int win_height = 600;
+    
     private int numTeams = number_of_Teams();
     private int rounds;
     public static int curLine = 0;
