@@ -1,13 +1,20 @@
 ///////////////////////////////////////////////////////////////////////////////
-// Title:            P2 (Implemented Using AVL Tree)
-// Files:            BalancedSearchTree.java, TestSearchTree.java, SearchTreeADT.java
+// Title:            Team Project, Milestone 3
+// This file:        Main.java
+// Other Files:      Challenger.java   FileManager.java   
 // Semester:         CS 400 Spring 2018
 //
-// Authors:          Matt Zimmers, Tarun Mandalapu
-// Email:            tmandalapu@wisc.edu
+// Authors:          Matt Zimmers
+//					 Tarun Mandalapu 
+//					 Zidong Zhang
+//					 Shuyan Zhang
+//					 Chao Wang
+// Email:            tmandalapu@wisc.edu 
+//					 
 // Lecturer's Name:  Debra Deppeler
-// Source Credits:   https://pages.cs.wisc.edu/~deppeler/cs400/readings/AVL-Trees/index.html
-// Known Bugs:       TODO
+// Source Credits:   StackOverflow
+// Known Bugs:       Final round of competition has weird gap between team
+//                   name and their associated text field 
 ///////////////////////////////////////////////////////////////////////////////
 package application;
 
