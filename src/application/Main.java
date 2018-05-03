@@ -144,11 +144,6 @@ public class Main extends Application {
                         challengerContent.get(columns.size()-(i+1)).add(newHBox);           
                     boxes.add(newHBox);
                 } else if (numTeams == 1) {
-//                  System.out.println("column size:"+columns.size());
-//                  System.out.println("challengerindex1:"+challengerIndex);
-//                  System.out.println("i:"+i);
-//                  System.out.println(numBoxes);
-//                  System.out.println(challengers);
                     VBox onlyTeam = new VBox();
                     onlyTeam.setAlignment(Pos.CENTER);
                     Label done = new Label();
@@ -382,19 +377,7 @@ public class Main extends Application {
         loser.restrictHBox(modifyLoser);
         winner.exitTournament();
         loser.exitTournament();
-        
-        /*
-         * challenger <- Challenger objects
-         * challengerContent <- HBoxes
-         * 
-         * Find challenger from last round who won, make references for 1st and 2nd
-         * Find challengers from second to last round where the current round isn't the last and the top scoring of those is 3rd
-         * Use index found to reference challengerContent HBoxes
-         * 
-         * Clear them and use challenger data to fill them
-         * 
-         */
-        
+      
         updatePlacing(winner, modifyWinner, loser, modifyLoser);
     }
 
