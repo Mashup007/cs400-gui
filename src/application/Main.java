@@ -418,19 +418,19 @@ public class Main extends Application {
         Label thirdL = new Label();
         
         firstL.setAlignment(Pos.CENTER);
-        firstL.setText("1st: " + winner.getTeamName() + ", Score: " + winner.getTeamScore());
+        firstL.setText("1st: " + winner.getTeamName() + "\n  Score: " + winner.getTeamScore());
         winnerContent.getChildren().clear();
         winnerContent.getChildren().add(firstL);
         
         if (second != null) {
             secondL.setAlignment(Pos.CENTER);
-            secondL.setText("2nd: " + second.getTeamName() + ", Score: " + second.getTeamScore());
+            secondL.setText("2nd: " + second.getTeamName() + "\n  Score: " + second.getTeamScore());
             secondContent.getChildren().clear();
             secondContent.getChildren().add(secondL);
         }
         if (third != null) {
             thirdL.setAlignment(Pos.CENTER);
-            thirdL.setText("3rd: " + third.getTeamName() + ", Score: " + third.getTeamScore());
+            thirdL.setText("3rd: " + third.getTeamName() + "\n  Score: " + third.getTeamScore());
             thirdContent.getChildren().clear();
             thirdContent.getChildren().add(thirdL);
         }
