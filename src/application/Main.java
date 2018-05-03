@@ -126,6 +126,7 @@ public class Main extends Application {
         int challengerIndex = 0;
         for (int i = 0; i < columns.size(); i++) {
             int numBoxes = (int)Math.pow(2,Math.abs(rounds-1-i));
+            if (rounds == 1 && numTeams == 2) numBoxes = 2;
             ArrayList<HBox> boxes = new ArrayList<HBox>();
             for (int j = 0; j < numBoxes; j++) {
                 if (numBoxes != 1 && numBoxes != 0) {
@@ -140,35 +141,31 @@ public class Main extends Application {
                     if (i <= columns.size()/2)
                         challengerContent.get(i).add(newHBox);
                     else
-                        challengerContent.get(columns.size()-(i+1)).add(newHBox);
-                        
+                        challengerContent.get(columns.size()-(i+1)).add(newHBox);           
                     boxes.add(newHBox);
-                } else if (numTeams == 2) {
-//                  System.out.println("column size:"+columns.size());
-//                  System.out.println("challengerindex1:"+challengerIndex);
-//                  System.out.println("i:"+i);
-//                  System.out.println(numBoxes);
-//                  System.out.println(challengers);
-                    
-                    columns.set(i, challengers.get(0).get(challengerIndex).fillVBox(columns.get(i)));
-                    challengerIndex++;
-                    columns.set(i, challengers.get(0).get(challengerIndex).fillVBox(columns.get(i)));
-                    System.out.println("challengerindex1:"+challengerIndex);
-                    columns.get(i).setSpacing(50);
                 } else if (numTeams == 1) {
 //                  System.out.println("column size:"+columns.size());
 //                  System.out.println("challengerindex1:"+challengerIndex);
 //                  System.out.println("i:"+i);
 //                  System.out.println(numBoxes);
 //                  System.out.println(challengers);
+                    VBox onlyTeam = new VBox();
+                    onlyTeam.setAlignment(Pos.CENTER);
+                    Label done = new Label();
+                    done.setAlignment(Pos.CENTER);
+                    done.setText("Champion by Default: " + challengers.get(0).get(0).getTeamName());
+                    onlyTeam.getChildren().add(done);
                     
-                    columns.set(0, challengers.get(0).get(0).fillVBox(columns.get(0)));
+                    columns.clear();
+                    columns.add(onlyTeam);
+                    central.setAlignment(Pos.CENTER);
                 }
             }
             if (boxes.size() != 0) columns.get(i).getChildren().addAll(boxes);
         }
         
         // Add finished columns to central layout
+        System.out.println(columns.size());
         central.getChildren().addAll(columns);
         bracket_layout.setCenter(central);
         
