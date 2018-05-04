@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Title:            Team Project, Milestone 3
-// This file:        Challenger.java
-// Other Files:      FileManager.java   Main.java
+// This file:        Main.java
+// Other Files:      Challenger.java   FileManager.java   
 // Semester:         CS 400 Spring 2018
 //
 // Authors:          Matt Zimmers
@@ -9,8 +9,11 @@
 //					 Zidong Zhang
 //					 Shuyan Zhang
 //					 Chao Wang
-// Email:            tmandalapu@wisc.edu 
-//					 
+// Email:            mzimmers@wisc.edu
+//					 tmandalapu@wisc.edu 
+//                   zzhang773@wisc.edu
+//					 szhang399@wisc.edu
+//                   cwang573@wisc.edu
 // Lecturer's Name:  Debra Deppeler
 // Source Credits:   StackOverflow
 // Known Bugs:       Final round of competition has weird gap between team
@@ -57,6 +60,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+/*
+ * Set attributions for Challengers 
+ */
 public class Challenger {
     private String teamName; //Challenger name
     private Integer teamRank; //Challenger seed

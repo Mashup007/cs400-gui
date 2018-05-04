@@ -9,7 +9,7 @@
 //					 Zidong Zhang
 //					 Shuyan Zhang
 //					 Chao Wang
-// Email:            
+// Email:            mzimmers@wisc.edu
 //					 tmandalapu@wisc.edu 
 //                   zzhang773@wisc.edu
 //					 szhang399@wisc.edu
@@ -64,6 +64,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
+/**
+ * Main function
+ */
 public class Main extends Application {
     //To make window dimensions more accessible for future use
     public int win_width = 1200; 
@@ -88,7 +91,8 @@ public class Main extends Application {
      * @param args: command line arguments
      */
     public static void main(String[] args) {
-        path = args[0]; //Initializing input file path
+    	if (args.length ==0) {path= "teamList.txt";}
+    	else{path = args[0];} //Initializing input file path
         launch(args); 
     }
 
@@ -429,12 +433,12 @@ public class Main extends Application {
             newHBox.setMaxSize(colSpace, (double)530/2);
             winner.fillHBox(newHBox);
             
-            HBox newHBox2 = new HBox(40);
+            HBox newHBox2 = new HBox(10);
             newHBox2.setAlignment(Pos.TOP_CENTER);
             newHBox2.setMinSize(colSpace, (double)530/2);
             newHBox2.setMaxSize(colSpace, (double)530/2);
             
-            center.setSpacing(10);
+            center.setSpacing(20);
             center.getChildren().addAll(newHBox,newHBox2);
         } else { 
             HBox lower = (HBox)center.getChildren().get(1);
@@ -509,7 +513,7 @@ public class Main extends Application {
         Label thirdL = new Label();
         
         firstL.setAlignment(Pos.CENTER);
-        firstL.setText("Champion: " + winner.getTeamName() + "\n  Score: " + winner.getTeamScore());
+        firstL.setText("Champion: " + winner.getTeamName() + "\n       Score: " + winner.getTeamScore());
         winnerContent.getChildren().clear();
         winnerContent.getChildren().add(firstL);
         
